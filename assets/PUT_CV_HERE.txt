@@ -1,0 +1,6 @@
+Place your CV PDF in this folder using this exact filename:
+
+Nafim_Ahmed_CV.pdf
+
+Final path:
+assets/Nafim_Ahmed_CV.pdf
