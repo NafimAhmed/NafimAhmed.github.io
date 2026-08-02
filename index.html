@@ -1,2991 +1,4 @@
 <!-- 
-
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta
-    name="description"
-    content="Portfolio of Nafim Ahmed — Software Engineer, Flutter Developer, ERP Mobile App Developer, AI Engineer and IoT enthusiast."
-  />
-  <meta name="theme-color" content="#07111f" />
-  <title>Nafim Ahmed | Software Engineer</title>
-
-  <style>
-    :root {
-      --bg: #07111f;
-      --bg-soft: #0c1828;
-      --surface: rgba(15, 30, 49, 0.82);
-      --surface-solid: #0f1e31;
-      --surface-light: #142840;
-      --text: #f5f7fb;
-      --muted: #aab6c6;
-      --primary: #25d99a;
-      --primary-dark: #12aa76;
-      --secondary: #58a6ff;
-      --border: rgba(255, 255, 255, 0.1);
-      --shadow: 0 22px 65px rgba(0, 0, 0, 0.28);
-      --radius: 22px;
-      --nav-height: 74px;
-      --max-width: 1180px;
-    }
-
-    body.light {
-      --bg: #f4f7fb;
-      --bg-soft: #eaf0f7;
-      --surface: rgba(255, 255, 255, 0.9);
-      --surface-solid: #ffffff;
-      --surface-light: #f1f5f9;
-      --text: #122033;
-      --muted: #5f6f82;
-      --border: rgba(15, 23, 42, 0.12);
-      --shadow: 0 22px 65px rgba(38, 57, 77, 0.12);
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    html {
-      scroll-behavior: smooth;
-      scroll-padding-top: calc(var(--nav-height) + 18px);
-    }
-
-    body {
-      min-height: 100vh;
-      overflow-x: hidden;
-      color: var(--text);
-      background:
-        radial-gradient(circle at 14% 16%, rgba(37, 217, 154, 0.12), transparent 28%),
-        radial-gradient(circle at 88% 12%, rgba(88, 166, 255, 0.13), transparent 30%),
-        var(--bg);
-      font-family:
-        Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
-        "Segoe UI", sans-serif;
-      line-height: 1.7;
-      transition: background 0.3s ease, color 0.3s ease;
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    button,
-    input,
-    textarea {
-      font: inherit;
-    }
-
-    img {
-      max-width: 100%;
-      display: block;
-    }
-
-    .container {
-      width: min(calc(100% - 40px), var(--max-width));
-      margin-inline: auto;
-    }
-
-    .skip-link {
-      position: fixed;
-      left: 16px;
-      top: -80px;
-      z-index: 1000;
-      padding: 10px 14px;
-      border-radius: 10px;
-      background: var(--primary);
-      color: #04120d;
-      font-weight: 800;
-      transition: top 0.2s;
-    }
-
-    .skip-link:focus {
-      top: 16px;
-    }
-
-    .navbar {
-      position: fixed;
-      inset: 0 0 auto 0;
-      z-index: 100;
-      height: var(--nav-height);
-      border-bottom: 1px solid transparent;
-      background: rgba(7, 17, 31, 0.66);
-      backdrop-filter: blur(18px);
-      -webkit-backdrop-filter: blur(18px);
-      transition: border-color 0.25s ease, box-shadow 0.25s ease;
-    }
-
-    body.light .navbar {
-      background: rgba(244, 247, 251, 0.78);
-    }
-
-    .navbar.scrolled {
-      border-color: var(--border);
-      box-shadow: 0 10px 35px rgba(0, 0, 0, 0.13);
-    }
-
-    .nav-inner {
-      height: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 28px;
-    }
-
-    .brand {
-      display: inline-flex;
-      align-items: center;
-      gap: 12px;
-      font-size: 1.02rem;
-      font-weight: 850;
-      letter-spacing: -0.02em;
-    }
-
-    .brand-mark {
-      width: 42px;
-      aspect-ratio: 1;
-      display: grid;
-      place-items: center;
-      border-radius: 13px;
-      background: linear-gradient(135deg, var(--primary), var(--secondary));
-      color: #04120d;
-      box-shadow: 0 10px 30px rgba(37, 217, 154, 0.25);
-    }
-
-    .brand-mark span {
-      font-size: 1rem;
-      font-weight: 950;
-    }
-
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 7px;
-      list-style: none;
-    }
-
-    .nav-links a {
-      position: relative;
-      display: inline-flex;
-      padding: 10px 11px;
-      color: var(--muted);
-      font-size: 0.9rem;
-      font-weight: 700;
-      transition: color 0.2s ease;
-    }
-
-    .nav-links a::after {
-      content: "";
-      position: absolute;
-      left: 12px;
-      right: 12px;
-      bottom: 4px;
-      height: 2px;
-      transform: scaleX(0);
-      border-radius: 5px;
-      background: var(--primary);
-      transition: transform 0.2s ease;
-    }
-
-    .nav-links a:hover,
-    .nav-links a.active {
-      color: var(--text);
-    }
-
-    .nav-links a.active::after {
-      transform: scaleX(1);
-    }
-
-    .nav-actions {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .icon-button,
-    .menu-button {
-      width: 43px;
-      height: 43px;
-      display: grid;
-      place-items: center;
-      border: 1px solid var(--border);
-      border-radius: 13px;
-      background: var(--surface);
-      color: var(--text);
-      cursor: pointer;
-      transition: transform 0.2s ease, border-color 0.2s ease;
-    }
-
-    .icon-button:hover,
-    .menu-button:hover {
-      transform: translateY(-2px);
-      border-color: rgba(37, 217, 154, 0.55);
-    }
-
-    .menu-button {
-      display: none;
-    }
-
-    .hero {
-      position: relative;
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      padding: calc(var(--nav-height) + 50px) 0 70px;
-    }
-
-    .hero::before {
-      content: "";
-      position: absolute;
-      width: 480px;
-      height: 480px;
-      left: -280px;
-      bottom: 40px;
-      border: 1px solid rgba(37, 217, 154, 0.16);
-      border-radius: 50%;
-      box-shadow:
-        0 0 0 70px rgba(37, 217, 154, 0.025),
-        0 0 0 140px rgba(37, 217, 154, 0.018);
-      pointer-events: none;
-    }
-
-    .hero-grid {
-      display: grid;
-      grid-template-columns: minmax(0, 1.3fr) minmax(300px, 0.7fr);
-      align-items: center;
-      gap: clamp(40px, 8vw, 100px);
-    }
-
-    .availability {
-      width: fit-content;
-      display: inline-flex;
-      align-items: center;
-      gap: 9px;
-      padding: 8px 13px;
-      border: 1px solid rgba(37, 217, 154, 0.28);
-      border-radius: 999px;
-      color: var(--primary);
-      background: rgba(37, 217, 154, 0.07);
-      font-size: 0.84rem;
-      font-weight: 800;
-      margin-bottom: 22px;
-    }
-
-    .pulse {
-      width: 9px;
-      height: 9px;
-      border-radius: 50%;
-      background: var(--primary);
-      box-shadow: 0 0 0 0 rgba(37, 217, 154, 0.55);
-      animation: pulse 2s infinite;
-    }
-
-    @keyframes pulse {
-      70% {
-        box-shadow: 0 0 0 9px rgba(37, 217, 154, 0);
-      }
-      100% {
-        box-shadow: 0 0 0 0 rgba(37, 217, 154, 0);
-      }
-    }
-
-    .eyebrow {
-      color: var(--primary);
-      font-size: clamp(0.94rem, 2vw, 1.08rem);
-      font-weight: 850;
-      letter-spacing: 0.13em;
-      text-transform: uppercase;
-    }
-
-    .hero h1 {
-      max-width: 790px;
-      margin: 14px 0 18px;
-      font-size: clamp(3.4rem, 8.2vw, 7.1rem);
-      line-height: 0.93;
-      letter-spacing: -0.065em;
-    }
-
-    .gradient-text {
-      color: transparent;
-      background: linear-gradient(120deg, var(--primary), #8fffd5 45%, var(--secondary));
-      -webkit-background-clip: text;
-      background-clip: text;
-    }
-
-    .typing-line {
-      min-height: 36px;
-      color: var(--muted);
-      font-size: clamp(1.12rem, 2.3vw, 1.55rem);
-      font-weight: 700;
-    }
-
-    .typed-text {
-      color: var(--text);
-    }
-
-    .cursor {
-      color: var(--primary);
-      animation: blink 0.72s infinite;
-    }
-
-    @keyframes blink {
-      50% { opacity: 0; }
-    }
-
-    .hero-description {
-      max-width: 680px;
-      margin-top: 22px;
-      color: var(--muted);
-      font-size: 1.03rem;
-    }
-
-    .hero-buttons {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 13px;
-      margin-top: 31px;
-    }
-
-    .btn {
-      min-height: 49px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 9px;
-      padding: 0 19px;
-      border: 1px solid transparent;
-      border-radius: 14px;
-      font-weight: 850;
-      transition:
-        transform 0.2s ease,
-        box-shadow 0.2s ease,
-        border-color 0.2s ease,
-        background 0.2s ease;
-    }
-
-    .btn:hover {
-      transform: translateY(-3px);
-    }
-
-    .btn-primary {
-      background: linear-gradient(135deg, var(--primary), #72f1c5);
-      color: #04130d;
-      box-shadow: 0 13px 35px rgba(37, 217, 154, 0.22);
-    }
-
-    .btn-secondary {
-      border-color: var(--border);
-      background: var(--surface);
-      color: var(--text);
-    }
-
-    .quick-links {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 15px 21px;
-      margin-top: 29px;
-      color: var(--muted);
-      font-size: 0.92rem;
-      font-weight: 700;
-    }
-
-    .quick-links a {
-      transition: color 0.2s ease;
-    }
-
-    .quick-links a:hover {
-      color: var(--primary);
-    }
-
-    .profile-wrap {
-      position: relative;
-      width: min(100%, 420px);
-      margin-inline: auto;
-    }
-
-    .profile-wrap::before {
-      content: "";
-      position: absolute;
-      inset: -18px;
-      border: 1px solid rgba(37, 217, 154, 0.24);
-      border-radius: 34px;
-      transform: rotate(5deg);
-      z-index: -1;
-    }
-
-    .profile-card {
-      position: relative;
-      overflow: hidden;
-      padding: 18px;
-      border: 1px solid var(--border);
-      border-radius: 30px;
-      background: var(--surface);
-      box-shadow: var(--shadow);
-    }
-
-    .profile-card::after {
-      content: "";
-      position: absolute;
-      width: 220px;
-      height: 220px;
-      top: -110px;
-      right: -90px;
-      border-radius: 50%;
-      background: rgba(88, 166, 255, 0.15);
-      filter: blur(8px);
-    }
-
-    .profile-image {
-      position: relative;
-      overflow: hidden;
-      aspect-ratio: 1 / 1.04;
-      border-radius: 22px;
-      background:
-        linear-gradient(145deg, rgba(37, 217, 154, 0.18), rgba(88, 166, 255, 0.18)),
-        var(--surface-light);
-    }
-
-    .profile-image img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .profile-info {
-      padding: 20px 5px 6px;
-    }
-
-    .profile-info h2 {
-      font-size: 1.42rem;
-      letter-spacing: -0.025em;
-    }
-
-    .profile-info p {
-      margin-top: 5px;
-      color: var(--muted);
-    }
-
-    .profile-meta {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 10px;
-      margin-top: 18px;
-    }
-
-    .meta-item {
-      padding: 12px;
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      background: rgba(255, 255, 255, 0.025);
-    }
-
-    .meta-label {
-      display: block;
-      color: var(--muted);
-      font-size: 0.75rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-    }
-
-    .meta-value {
-      display: block;
-      margin-top: 4px;
-      font-size: 0.9rem;
-      font-weight: 850;
-    }
-
-    .stats {
-      position: relative;
-      z-index: 3;
-      margin-top: -20px;
-    }
-
-    .stats-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 14px;
-      padding: 15px;
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      background: var(--surface);
-      backdrop-filter: blur(16px);
-      box-shadow: var(--shadow);
-    }
-
-    .stat {
-      padding: 20px;
-      text-align: center;
-      border-radius: 17px;
-      background: rgba(255, 255, 255, 0.025);
-    }
-
-    .stat strong {
-      display: block;
-      color: var(--primary);
-      font-size: clamp(1.7rem, 3vw, 2.25rem);
-      line-height: 1.15;
-    }
-
-    .stat span {
-      display: block;
-      margin-top: 6px;
-      color: var(--muted);
-      font-size: 0.86rem;
-      font-weight: 750;
-    }
-
-    section {
-      padding: 105px 0;
-    }
-
-    .section-heading {
-      max-width: 730px;
-      margin-bottom: 45px;
-    }
-
-    .section-tag {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      color: var(--primary);
-      font-size: 0.82rem;
-      font-weight: 900;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-    }
-
-    .section-tag::before {
-      content: "";
-      width: 28px;
-      height: 2px;
-      border-radius: 8px;
-      background: var(--primary);
-    }
-
-    .section-heading h2 {
-      margin-top: 13px;
-      font-size: clamp(2.15rem, 5vw, 3.8rem);
-      line-height: 1.08;
-      letter-spacing: -0.045em;
-    }
-
-    .section-heading p {
-      margin-top: 15px;
-      color: var(--muted);
-    }
-
-    .about-grid {
-      display: grid;
-      grid-template-columns: 0.95fr 1.05fr;
-      gap: 28px;
-    }
-
-    .panel {
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      background: var(--surface);
-      box-shadow: var(--shadow);
-    }
-
-    .about-copy {
-      padding: clamp(25px, 5vw, 44px);
-    }
-
-    .about-copy p {
-      color: var(--muted);
-      margin-top: 16px;
-    }
-
-    .about-copy p:first-of-type {
-      margin-top: 0;
-      color: var(--text);
-      font-size: 1.08rem;
-      font-weight: 650;
-    }
-
-    .focus-list {
-      display: grid;
-      gap: 14px;
-      padding: 24px;
-    }
-
-    .focus-item {
-      display: grid;
-      grid-template-columns: 48px 1fr;
-      gap: 15px;
-      align-items: start;
-      padding: 18px;
-      border: 1px solid var(--border);
-      border-radius: 17px;
-      background: rgba(255, 255, 255, 0.025);
-      transition: transform 0.2s ease, border-color 0.2s ease;
-    }
-
-    .focus-item:hover {
-      transform: translateX(5px);
-      border-color: rgba(37, 217, 154, 0.4);
-    }
-
-    .focus-icon {
-      width: 48px;
-      aspect-ratio: 1;
-      display: grid;
-      place-items: center;
-      border-radius: 14px;
-      color: var(--primary);
-      background: rgba(37, 217, 154, 0.09);
-      font-size: 1.25rem;
-      font-weight: 900;
-    }
-
-    .focus-item h3 {
-      font-size: 1rem;
-    }
-
-    .focus-item p {
-      margin-top: 5px;
-      color: var(--muted);
-      font-size: 0.9rem;
-    }
-
-    .education-grid {
-      display: grid;
-      grid-template-columns: minmax(0, 0.34fr) minmax(0, 0.66fr);
-      gap: 22px;
-      align-items: stretch;
-    }
-
-    .education-highlight {
-      position: relative;
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      min-height: 290px;
-      padding: clamp(28px, 5vw, 45px);
-      border: 1px solid rgba(37, 217, 154, 0.28);
-      border-radius: var(--radius);
-      background:
-        linear-gradient(145deg, rgba(37, 217, 154, 0.14), transparent 62%),
-        var(--surface);
-      box-shadow: var(--shadow);
-    }
-
-    .education-highlight::after {
-      content: "";
-      position: absolute;
-      width: 210px;
-      height: 210px;
-      right: -100px;
-      bottom: -105px;
-      border: 1px solid rgba(88, 166, 255, 0.24);
-      border-radius: 50%;
-      box-shadow: 0 0 0 45px rgba(88, 166, 255, 0.025);
-    }
-
-    .education-icon {
-      position: relative;
-      z-index: 1;
-      width: 62px;
-      height: 62px;
-      display: grid;
-      place-items: center;
-      border-radius: 18px;
-      color: #04130d;
-      background: linear-gradient(135deg, var(--primary), #8fffd5);
-      font-size: 1.6rem;
-      box-shadow: 0 13px 30px rgba(37, 217, 154, 0.2);
-    }
-
-    .education-highlight h3 {
-      position: relative;
-      z-index: 1;
-      margin-top: 30px;
-      font-size: clamp(1.7rem, 4vw, 2.45rem);
-      line-height: 1.12;
-      letter-spacing: -0.04em;
-    }
-
-    .education-highlight p {
-      position: relative;
-      z-index: 1;
-      margin-top: 12px;
-      color: var(--muted);
-    }
-
-    .education-card {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      padding: clamp(28px, 5vw, 46px);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      background: var(--surface);
-      box-shadow: var(--shadow);
-    }
-
-    .education-degree {
-      color: var(--primary);
-      font-size: 0.82rem;
-      font-weight: 900;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-    }
-
-    .education-card h3 {
-      margin-top: 12px;
-      font-size: clamp(1.65rem, 3.5vw, 2.5rem);
-      line-height: 1.15;
-      letter-spacing: -0.035em;
-    }
-
-    .education-institute {
-      margin-top: 8px;
-      color: var(--secondary);
-      font-size: 1.04rem;
-      font-weight: 850;
-    }
-
-    .education-description {
-      margin-top: 17px;
-      color: var(--muted);
-    }
-
-    .education-meta {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 11px;
-      margin-top: 25px;
-    }
-
-    .education-meta-item {
-      padding: 14px;
-      border: 1px solid var(--border);
-      border-radius: 15px;
-      background: rgba(255, 255, 255, 0.025);
-    }
-
-    .education-meta-item small {
-      display: block;
-      color: var(--muted);
-      font-size: 0.7rem;
-      font-weight: 800;
-      letter-spacing: 0.07em;
-      text-transform: uppercase;
-    }
-
-    .education-meta-item strong {
-      display: block;
-      margin-top: 5px;
-      font-size: 0.9rem;
-      line-height: 1.4;
-    }
-
-    .education-list {
-      display: grid;
-      gap: 16px;
-    }
-
-    .education-item {
-      position: relative;
-      overflow: hidden;
-      padding: 25px;
-      border: 1px solid var(--border);
-      border-radius: 19px;
-      background: var(--surface);
-      box-shadow: var(--shadow);
-      transition: transform 0.22s ease, border-color 0.22s ease;
-    }
-
-    .education-item:hover {
-      transform: translateY(-5px);
-      border-color: rgba(37, 217, 154, 0.42);
-    }
-
-    .education-item::after {
-      content: "";
-      position: absolute;
-      width: 120px;
-      height: 120px;
-      right: -65px;
-      bottom: -70px;
-      border-radius: 50%;
-      background: rgba(88, 166, 255, 0.055);
-      pointer-events: none;
-    }
-
-    .education-item-head {
-      position: relative;
-      z-index: 1;
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      gap: 18px;
-    }
-
-    .education-level {
-      display: inline-flex;
-      padding: 6px 10px;
-      border: 1px solid rgba(37, 217, 154, 0.25);
-      border-radius: 999px;
-      color: var(--primary);
-      background: rgba(37, 217, 154, 0.065);
-      font-size: 0.74rem;
-      font-weight: 900;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-    }
-
-    .education-year {
-      flex: 0 0 auto;
-      color: var(--secondary);
-      font-size: 1.2rem;
-      font-weight: 950;
-      letter-spacing: -0.03em;
-    }
-
-    .education-item h3 {
-      position: relative;
-      z-index: 1;
-      margin-top: 13px;
-      font-size: 1.25rem;
-      line-height: 1.3;
-    }
-
-    .education-item .education-institute {
-      position: relative;
-      z-index: 1;
-      margin-top: 6px;
-      color: var(--muted);
-      font-size: 0.93rem;
-      font-weight: 750;
-    }
-
-    .education-item-note {
-      position: relative;
-      z-index: 1;
-      margin-top: 11px;
-      color: var(--muted);
-      font-size: 0.88rem;
-    }
-
-    .training-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 18px;
-    }
-
-    .training-card {
-      position: relative;
-      overflow: hidden;
-      min-height: 390px;
-      display: flex;
-      flex-direction: column;
-      padding: 27px;
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      background:
-        linear-gradient(145deg, rgba(88, 166, 255, 0.055), transparent 58%),
-        var(--surface);
-      transition: transform 0.24s ease, border-color 0.24s ease;
-    }
-
-    .training-card:nth-child(2) {
-      background:
-        linear-gradient(145deg, rgba(37, 217, 154, 0.07), transparent 58%),
-        var(--surface);
-    }
-
-    .training-card:hover {
-      transform: translateY(-7px);
-      border-color: rgba(88, 166, 255, 0.45);
-    }
-
-    .training-icon {
-      width: 50px;
-      height: 50px;
-      display: grid;
-      place-items: center;
-      border-radius: 15px;
-      color: var(--secondary);
-      background: rgba(88, 166, 255, 0.1);
-      font-size: 1.15rem;
-      font-weight: 950;
-    }
-
-    .training-card:nth-child(2) .training-icon {
-      color: var(--primary);
-      background: rgba(37, 217, 154, 0.09);
-    }
-
-    .training-type {
-      width: fit-content;
-      margin-top: 20px;
-      color: var(--primary);
-      font-size: 0.74rem;
-      font-weight: 900;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-    }
-
-    .training-card h3 {
-      margin-top: 9px;
-      font-size: 1.25rem;
-      line-height: 1.3;
-    }
-
-    .training-card p {
-      flex: 1;
-      margin-top: 12px;
-      color: var(--muted);
-      font-size: 0.9rem;
-    }
-
-    .training-topics {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-top: 20px;
-    }
-
-    .training-topics span {
-      padding: 6px 9px;
-      border: 1px solid var(--border);
-      border-radius: 999px;
-      color: var(--muted);
-      background: rgba(255, 255, 255, 0.025);
-      font-size: 0.73rem;
-      font-weight: 750;
-    }
-
-    .credential-meta {
-      display: grid;
-      gap: 9px;
-      margin-top: 20px;
-    }
-
-    .credential-meta div {
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      gap: 14px;
-      padding: 10px 0;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .credential-meta div:last-child {
-      border-bottom: 0;
-    }
-
-    .credential-meta span {
-      flex: 0 0 auto;
-      color: var(--muted);
-      font-size: 0.74rem;
-      font-weight: 800;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
-    }
-
-    .credential-meta strong {
-      text-align: right;
-      font-size: 0.82rem;
-      line-height: 1.45;
-      overflow-wrap: anywhere;
-    }
-
-    .training-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 22px;
-    }
-
-    .training-link {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 40px;
-      padding: 0 13px;
-      border: 1px solid rgba(37, 217, 154, 0.28);
-      border-radius: 11px;
-      color: var(--primary);
-      background: rgba(37, 217, 154, 0.065);
-      font-size: 0.8rem;
-      font-weight: 850;
-      transition: transform 0.2s ease, border-color 0.2s ease;
-    }
-
-    .training-link:hover {
-      transform: translateY(-2px);
-      border-color: rgba(37, 217, 154, 0.58);
-    }
-
-    .training-link-secondary {
-      color: var(--secondary);
-      border-color: rgba(88, 166, 255, 0.28);
-      background: rgba(88, 166, 255, 0.065);
-    }
-
-    .training-link-secondary:hover {
-      border-color: rgba(88, 166, 255, 0.58);
-    }
-
-    .credential-note {
-      display: flex;
-      align-items: flex-start;
-      gap: 13px;
-      margin-top: 18px;
-      padding: 18px 20px;
-      border: 1px dashed rgba(37, 217, 154, 0.32);
-      border-radius: 17px;
-      color: var(--muted);
-      background: rgba(37, 217, 154, 0.045);
-      font-size: 0.88rem;
-    }
-
-    .credential-note strong {
-      color: var(--text);
-    }
-
-    .skills-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 18px;
-    }
-
-    .skill-card {
-      padding: 27px;
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      background: var(--surface);
-      transition: transform 0.24s ease, border-color 0.24s ease;
-    }
-
-    .skill-card:hover {
-      transform: translateY(-7px);
-      border-color: rgba(37, 217, 154, 0.42);
-    }
-
-    .skill-card-number {
-      color: var(--primary);
-      font-size: 0.78rem;
-      font-weight: 950;
-      letter-spacing: 0.1em;
-    }
-
-    .skill-card h3 {
-      margin-top: 10px;
-      font-size: 1.22rem;
-    }
-
-    .chips {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 9px;
-      margin-top: 18px;
-    }
-
-    .chip {
-      padding: 7px 10px;
-      border: 1px solid var(--border);
-      border-radius: 999px;
-      color: var(--muted);
-      background: rgba(255, 255, 255, 0.025);
-      font-size: 0.78rem;
-      font-weight: 750;
-    }
-
-    .experience-layout {
-      display: grid;
-      grid-template-columns: minmax(0, 0.72fr) minmax(0, 1.28fr);
-      gap: 24px;
-      align-items: start;
-    }
-
-    .experience-summary {
-      position: sticky;
-      top: calc(var(--nav-height) + 24px);
-      padding: 32px;
-    }
-
-    .experience-summary strong {
-      display: block;
-      color: var(--primary);
-      font-size: 3rem;
-      line-height: 1;
-      letter-spacing: -0.06em;
-    }
-
-    .experience-summary h3 {
-      margin-top: 14px;
-      font-size: 1.35rem;
-    }
-
-    .experience-summary p {
-      margin-top: 12px;
-      color: var(--muted);
-    }
-
-    .timeline {
-      position: relative;
-      display: grid;
-      gap: 16px;
-    }
-
-    .timeline::before {
-      content: "";
-      position: absolute;
-      left: 23px;
-      top: 30px;
-      bottom: 30px;
-      width: 2px;
-      background: linear-gradient(var(--primary), rgba(88, 166, 255, 0.25));
-    }
-
-    .timeline-item {
-      position: relative;
-      display: grid;
-      grid-template-columns: 48px 1fr;
-      gap: 17px;
-    }
-
-    .timeline-dot {
-      position: relative;
-      z-index: 1;
-      width: 48px;
-      height: 48px;
-      display: grid;
-      place-items: center;
-      border: 5px solid var(--bg);
-      border-radius: 50%;
-      color: #04130d;
-      background: var(--primary);
-      font-size: 0.78rem;
-      font-weight: 950;
-    }
-
-    .timeline-card {
-      padding: 25px;
-      border: 1px solid var(--border);
-      border-radius: 19px;
-      background: var(--surface);
-    }
-
-    .timeline-head {
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      gap: 15px;
-    }
-
-    .timeline-card h3 {
-      font-size: 1.13rem;
-    }
-
-    .timeline-company {
-      margin-top: 3px;
-      color: var(--primary);
-      font-weight: 800;
-    }
-
-    .timeline-badge {
-      flex: 0 0 auto;
-      padding: 6px 10px;
-      border-radius: 999px;
-      color: var(--secondary);
-      background: rgba(88, 166, 255, 0.09);
-      font-size: 0.73rem;
-      font-weight: 850;
-    }
-
-    .timeline-card p {
-      margin-top: 13px;
-      color: var(--muted);
-      font-size: 0.92rem;
-    }
-
-    .projects-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 20px;
-    }
-
-    .project-card {
-      position: relative;
-      min-height: 330px;
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      padding: 31px;
-      border: 1px solid var(--border);
-      border-radius: 25px;
-      background:
-        linear-gradient(145deg, rgba(37, 217, 154, 0.055), transparent 52%),
-        var(--surface);
-      transition: transform 0.25s ease, border-color 0.25s ease;
-    }
-
-    .project-card:nth-child(2n) {
-      background:
-        linear-gradient(145deg, rgba(88, 166, 255, 0.07), transparent 52%),
-        var(--surface);
-    }
-
-    .project-card::after {
-      content: "";
-      position: absolute;
-      right: -45px;
-      bottom: -60px;
-      width: 180px;
-      height: 180px;
-      border-radius: 50%;
-      background: rgba(37, 217, 154, 0.055);
-      transition: transform 0.3s ease;
-    }
-
-    .project-card:hover {
-      transform: translateY(-8px);
-      border-color: rgba(37, 217, 154, 0.42);
-    }
-
-    .project-card:hover::after {
-      transform: scale(1.15);
-    }
-
-    .project-top,
-    .project-bottom {
-      position: relative;
-      z-index: 2;
-    }
-
-    .project-type {
-      display: inline-flex;
-      padding: 7px 10px;
-      border: 1px solid var(--border);
-      border-radius: 999px;
-      color: var(--primary);
-      font-size: 0.74rem;
-      font-weight: 900;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-    }
-
-    .project-card h3 {
-      margin-top: 19px;
-      font-size: clamp(1.55rem, 3vw, 2.1rem);
-      line-height: 1.13;
-      letter-spacing: -0.035em;
-    }
-
-    .project-card p {
-      margin-top: 13px;
-      color: var(--muted);
-      font-size: 0.94rem;
-    }
-
-    .project-tech {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-top: 20px;
-    }
-
-    .project-tech span {
-      color: var(--muted);
-      font-size: 0.78rem;
-      font-weight: 750;
-    }
-
-    .project-links {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 27px;
-    }
-
-    .project-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 7px;
-      color: var(--text);
-      font-size: 0.88rem;
-      font-weight: 850;
-    }
-
-    .project-link:hover {
-      color: var(--primary);
-    }
-
-    .packages-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 17px;
-    }
-
-    .package-card {
-      display: flex;
-      flex-direction: column;
-      min-height: 220px;
-      padding: 25px;
-      border: 1px solid var(--border);
-      border-radius: 20px;
-      background: var(--surface);
-      transition: transform 0.22s ease, border-color 0.22s ease;
-    }
-
-    .package-card:hover {
-      transform: translateY(-6px);
-      border-color: rgba(88, 166, 255, 0.45);
-    }
-
-    .package-icon {
-      width: 45px;
-      aspect-ratio: 1;
-      display: grid;
-      place-items: center;
-      border-radius: 14px;
-      color: var(--secondary);
-      background: rgba(88, 166, 255, 0.1);
-      font-weight: 950;
-    }
-
-    .package-card h3 {
-      margin-top: 16px;
-      font-size: 1.03rem;
-      overflow-wrap: anywhere;
-    }
-
-    .package-card p {
-      flex: 1;
-      margin-top: 8px;
-      color: var(--muted);
-      font-size: 0.86rem;
-    }
-
-    .package-card a {
-      width: fit-content;
-      margin-top: 17px;
-      color: var(--primary);
-      font-size: 0.84rem;
-      font-weight: 850;
-    }
-
-    .publications {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 18px;
-    }
-
-    .publication-card {
-      display: grid;
-      grid-template-columns: 60px 1fr;
-      gap: 18px;
-      padding: 25px;
-      border: 1px solid var(--border);
-      border-radius: 20px;
-      background: var(--surface);
-    }
-
-    .publication-year {
-      width: 60px;
-      height: 60px;
-      display: grid;
-      place-items: center;
-      border-radius: 17px;
-      color: var(--primary);
-      background: rgba(37, 217, 154, 0.09);
-      font-size: 0.87rem;
-      font-weight: 900;
-    }
-
-    .publication-card h3 {
-      font-size: 1.04rem;
-      line-height: 1.35;
-    }
-
-    .publication-card p {
-      margin-top: 7px;
-      color: var(--muted);
-      font-size: 0.87rem;
-    }
-
-    .contact-card {
-      position: relative;
-      overflow: hidden;
-      display: grid;
-      grid-template-columns: 1.15fr 0.85fr;
-      gap: 40px;
-      padding: clamp(30px, 6vw, 65px);
-      border: 1px solid var(--border);
-      border-radius: 30px;
-      background:
-        linear-gradient(130deg, rgba(37, 217, 154, 0.13), transparent 48%),
-        linear-gradient(310deg, rgba(88, 166, 255, 0.1), transparent 45%),
-        var(--surface);
-      box-shadow: var(--shadow);
-    }
-
-    .contact-card::after {
-      content: "";
-      position: absolute;
-      width: 310px;
-      height: 310px;
-      right: -140px;
-      top: -150px;
-      border: 1px solid rgba(37, 217, 154, 0.2);
-      border-radius: 50%;
-      box-shadow: 0 0 0 55px rgba(37, 217, 154, 0.025);
-    }
-
-    .contact-copy {
-      position: relative;
-      z-index: 2;
-    }
-
-    .contact-copy h2 {
-      font-size: clamp(2.25rem, 5vw, 4.2rem);
-      line-height: 1.02;
-      letter-spacing: -0.05em;
-    }
-
-    .contact-copy p {
-      max-width: 620px;
-      margin-top: 17px;
-      color: var(--muted);
-    }
-
-    .contact-list {
-      position: relative;
-      z-index: 2;
-      display: grid;
-      gap: 12px;
-    }
-
-    .contact-item {
-      display: flex;
-      align-items: center;
-      gap: 13px;
-      padding: 15px;
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      background: rgba(255, 255, 255, 0.035);
-      transition: transform 0.2s ease, border-color 0.2s ease;
-    }
-
-    .contact-item:hover {
-      transform: translateX(5px);
-      border-color: rgba(37, 217, 154, 0.4);
-    }
-
-    .contact-icon {
-      width: 42px;
-      height: 42px;
-      flex: 0 0 42px;
-      display: grid;
-      place-items: center;
-      border-radius: 13px;
-      color: var(--primary);
-      background: rgba(37, 217, 154, 0.09);
-      font-weight: 950;
-    }
-
-    .contact-item small {
-      display: block;
-      color: var(--muted);
-      font-size: 0.72rem;
-      font-weight: 750;
-      text-transform: uppercase;
-      letter-spacing: 0.07em;
-    }
-
-    .contact-item strong {
-      display: block;
-      margin-top: 2px;
-      font-size: 0.88rem;
-      overflow-wrap: anywhere;
-    }
-
-    footer {
-      padding: 25px 0 38px;
-      color: var(--muted);
-      font-size: 0.84rem;
-    }
-
-    .footer-inner {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 18px;
-      padding-top: 25px;
-      border-top: 1px solid var(--border);
-    }
-
-    .footer-links {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 15px;
-      font-weight: 750;
-    }
-
-    .footer-links a:hover {
-      color: var(--primary);
-    }
-
-    .reveal {
-      opacity: 0;
-      transform: translateY(26px);
-      transition: opacity 0.7s ease, transform 0.7s ease;
-    }
-
-    .reveal.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .back-to-top {
-      position: fixed;
-      right: 22px;
-      bottom: 22px;
-      z-index: 80;
-      width: 48px;
-      height: 48px;
-      display: grid;
-      place-items: center;
-      border: 1px solid var(--border);
-      border-radius: 15px;
-      color: #04130d;
-      background: var(--primary);
-      box-shadow: 0 14px 35px rgba(37, 217, 154, 0.23);
-      cursor: pointer;
-      opacity: 0;
-      visibility: hidden;
-      transform: translateY(15px);
-      transition: all 0.25s ease;
-    }
-
-    .back-to-top.show {
-      opacity: 1;
-      visibility: visible;
-      transform: translateY(0);
-    }
-
-    @media (max-width: 980px) {
-      .nav-links {
-        position: fixed;
-        left: 20px;
-        right: 20px;
-        top: calc(var(--nav-height) + 10px);
-        display: none;
-        flex-direction: column;
-        align-items: stretch;
-        gap: 3px;
-        padding: 14px;
-        border: 1px solid var(--border);
-        border-radius: 18px;
-        background: var(--surface-solid);
-        box-shadow: var(--shadow);
-      }
-
-      .nav-links.open {
-        display: flex;
-      }
-
-      .nav-links a {
-        padding: 12px 13px;
-        border-radius: 10px;
-      }
-
-      .nav-links a:hover,
-      .nav-links a.active {
-        background: var(--surface-light);
-      }
-
-      .nav-links a::after {
-        display: none;
-      }
-
-      .menu-button {
-        display: grid;
-      }
-
-      .hero-grid,
-      .about-grid,
-      .education-grid,
-      .experience-layout,
-      .contact-card {
-        grid-template-columns: 1fr;
-      }
-
-      .hero {
-        min-height: auto;
-        padding-top: calc(var(--nav-height) + 75px);
-      }
-
-      .hero-copy {
-        text-align: center;
-      }
-
-      .availability,
-      .hero-buttons,
-      .quick-links {
-        margin-inline: auto;
-        justify-content: center;
-      }
-
-      .hero-description {
-        margin-inline: auto;
-      }
-
-      .profile-wrap {
-        max-width: 390px;
-      }
-
-      .experience-summary {
-        position: static;
-      }
-
-      .skills-grid,
-      .packages-grid,
-      .training-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .contact-list {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
-
-    @media (max-width: 720px) {
-      .container {
-        width: min(calc(100% - 28px), var(--max-width));
-      }
-
-      .brand-text {
-        display: none;
-      }
-
-      .hero h1 {
-        font-size: clamp(3.2rem, 17vw, 5rem);
-      }
-
-      .stats-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .skills-grid,
-      .projects-grid,
-      .packages-grid,
-      .training-grid,
-      .publications,
-      .contact-list,
-      .education-meta {
-        grid-template-columns: 1fr;
-      }
-
-      .timeline-head {
-        flex-direction: column;
-      }
-
-      .publication-card {
-        grid-template-columns: 1fr;
-      }
-
-      .publication-year {
-        width: fit-content;
-        height: auto;
-        padding: 8px 11px;
-      }
-
-      .footer-inner {
-        flex-direction: column;
-        text-align: center;
-      }
-    }
-
-    @media (max-width: 470px) {
-      section {
-        padding: 82px 0;
-      }
-
-      .hero-buttons {
-        flex-direction: column;
-      }
-
-      .btn {
-        width: 100%;
-      }
-
-      .profile-meta,
-      .stats-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .stat {
-        padding: 16px;
-      }
-
-      .project-card {
-        padding: 24px;
-      }
-
-      .timeline-item {
-        grid-template-columns: 40px 1fr;
-        gap: 11px;
-      }
-
-      .timeline-dot {
-        width: 40px;
-        height: 40px;
-      }
-
-      .timeline::before {
-        left: 19px;
-      }
-
-      .education-item-head {
-        flex-direction: column;
-        gap: 8px;
-      }
-
-      .contact-card {
-        padding: 27px 20px;
-      }
-
-
-      .credential-meta div {
-        flex-direction: column;
-        gap: 4px;
-      }
-
-      .credential-meta strong {
-        text-align: left;
-      }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      html {
-        scroll-behavior: auto;
-      }
-
-      *,
-      *::before,
-      *::after {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
-      }
-
-      .reveal {
-        opacity: 1;
-        transform: none;
-      }
-    }
-  </style>
-</head>
-
-<body>
-  <a class="skip-link" href="#main-content">Skip to content</a>
-
-  <nav class="navbar" id="navbar" aria-label="Primary navigation">
-    <div class="container nav-inner">
-      <a class="brand" href="#home" aria-label="Nafim Ahmed home">
-        <span class="brand-mark"><span>NA</span></span>
-        <span class="brand-text">Nafim Ahmed</span>
-      </a>
-
-      <ul class="nav-links" id="navLinks">
-        <li><a class="active" href="#home">Home</a></li>
-        <li><a href="#about">About</a></li>
-        <li><a href="#education">Education</a></li>
-        <li><a href="#certifications">Training</a></li>
-        <li><a href="#skills">Skills</a></li>
-        <li><a href="#experience">Experience</a></li>
-        <li><a href="#projects">Projects</a></li>
-        <li><a href="#packages">Packages</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
-
-      <div class="nav-actions">
-        <button
-          class="icon-button"
-          id="themeToggle"
-          type="button"
-          aria-label="Toggle light and dark mode"
-          title="Toggle theme"
-        >
-          <span id="themeIcon">☾</span>
-        </button>
-
-        <button
-          class="menu-button"
-          id="menuButton"
-          type="button"
-          aria-label="Open navigation menu"
-          aria-expanded="false"
-        >
-          <span>☰</span>
-        </button>
-      </div>
-    </div>
-  </nav>
-
-  <main id="main-content">
-    <section class="hero" id="home">
-      <div class="container hero-grid">
-        <div class="hero-copy reveal">
-          <div class="availability">
-            <span class="pulse" aria-hidden="true"></span>
-            Open to impactful opportunities
-          </div>
-
-          <p class="eyebrow">Hello, I’m</p>
-
-          <h1>
-            Nafim<br />
-            <span class="gradient-text">Ahmed.</span>
-          </h1>
-
-          <p class="typing-line" aria-live="polite">
-            I build
-            <span class="typed-text" id="typedText">scalable Flutter applications</span>
-            <span class="cursor">|</span>
-          </p>
-
-          <p class="hero-description">
-            Software Engineer with 5+ years of experience building mobile applications,
-            enterprise ERP solutions, AI-powered products, APIs and connected IoT systems.
-            Currently contributing to Oracle EBS–integrated mobile solutions at PRAN-RFL Group.
-          </p>
-
-          <div class="hero-buttons">
-            <a class="btn btn-primary" href="#projects">
-              Explore my work <span aria-hidden="true">↗</span>
-            </a>
-            <a
-              class="btn btn-secondary"
-              href="assets/Nafim_Ahmed_CV.pdf"
-              download="Nafim_Ahmed_CV.pdf"
-              aria-label="Download Nafim Ahmed CV as PDF"
-            >
-              Download CV <span aria-hidden="true">↓</span>
-            </a>
-            <a class="btn btn-secondary" href="mailto:recentnafimahmed@gmail.com">
-              Let’s work together
-            </a>
-          </div>
-
-          <div class="quick-links" aria-label="Social links">
-            <a href="https://github.com/NafimAhmed" target="_blank" rel="noopener noreferrer">
-              GitHub ↗
-            </a>
-            <a
-              href="https://www.linkedin.com/in/nafim-ahmed-recent/"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              LinkedIn ↗
-            </a>
-            <a href="https://pub.dev/publishers/" target="_blank" rel="noopener noreferrer">
-              Pub.dev ↗
-            </a>
-          </div>
-        </div>
-
-        <div class="profile-wrap reveal">
-          <article class="profile-card">
-            <div class="profile-image">
-              <img
-                src="https://avatars.githubusercontent.com/u/49490709?v=4"
-                alt="Nafim Ahmed"
-                loading="eager"
-              />
-            </div>
-
-            <div class="profile-info">
-              <h2>Software Engineer</h2>
-              <p>Flutter • ERP • AI • IoT</p>
-
-              <div class="profile-meta">
-                <div class="meta-item">
-                  <span class="meta-label">Based in</span>
-                  <span class="meta-value">Dhaka, Bangladesh</span>
-                </div>
-                <div class="meta-item">
-                  <span class="meta-label">Experience</span>
-                  <span class="meta-value">5+ Years</span>
-                </div>
-                <div class="meta-item">
-                  <span class="meta-label">Focus</span>
-                  <span class="meta-value">Product Engineering</span>
-                </div>
-                <div class="meta-item">
-                  <span class="meta-label">Work mode</span>
-                  <span class="meta-value">Remote / On-site</span>
-                </div>
-              </div>
-            </div>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <div class="stats container reveal" aria-label="Career statistics">
-      <div class="stats-grid">
-        <div class="stat">
-          <strong>5+</strong>
-          <span>Years of experience</span>
-        </div>
-        <div class="stat">
-          <strong>80+</strong>
-          <span>GitHub repositories</span>
-        </div>
-        <div class="stat">
-          <strong>5+</strong>
-          <span>Published packages</span>
-        </div>
-        <div class="stat">
-          <strong>2</strong>
-          <span>Research publications</span>
-        </div>
-      </div>
-    </div>
-
-    <section id="about">
-      <div class="container">
-        <header class="section-heading reveal">
-          <span class="section-tag">About me</span>
-          <h2>Engineering practical products that connect people, data and operations.</h2>
-          <p>
-            My work sits at the intersection of mobile engineering, enterprise systems,
-            artificial intelligence and real-world automation.
-          </p>
-        </header>
-
-        <div class="about-grid">
-          <article class="panel about-copy reveal">
-            <p>
-              I am a Software Engineer and Flutter specialist from Dhaka, Bangladesh,
-              experienced in designing production-grade mobile applications and
-              integrating them with complex backend and Oracle ERP systems.
-            </p>
-
-            <p>
-              I have worked across REST APIs, real-time communication, offline-first
-              applications, QR and barcode workflows, NFC/RFID devices, printing,
-              location services, Firebase, computer vision and intelligent chatbot systems.
-            </p>
-
-            <p>
-              Beyond application development, I build reusable Flutter packages and explore
-              AI, IoT and embedded systems to turn experimental concepts into useful,
-              maintainable products.
-            </p>
-
-            <div class="hero-buttons">
-              <a class="btn btn-primary" href="mailto:recentnafimahmed@gmail.com">
-                Contact me
-              </a>
-              <a
-                class="btn btn-secondary"
-                href="assets/Nafim_Ahmed_CV.pdf"
-                download="Nafim_Ahmed_CV.pdf"
-                aria-label="Download Nafim Ahmed CV as PDF"
-              >
-                Download CV <span aria-hidden="true">↓</span>
-              </a>
-              <a
-                class="btn btn-secondary"
-                href="https://github.com/NafimAhmed"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                View GitHub
-              </a>
-            </div>
-          </article>
-
-          <div class="panel focus-list reveal">
-            <article class="focus-item">
-              <div class="focus-icon">01</div>
-              <div>
-                <h3>Enterprise Mobile Engineering</h3>
-                <p>
-                  ERP mobile applications, Oracle EBS integrations, secure APIs,
-                  role-based workflows and offline-ready business processes.
-                </p>
-              </div>
-            </article>
-
-            <article class="focus-item">
-              <div class="focus-icon">02</div>
-              <div>
-                <h3>AI-powered Experiences</h3>
-                <p>
-                  Computer vision, intelligent chatbots, prediction systems,
-                  model integration and AI-enabled mobile products.
-                </p>
-              </div>
-            </article>
-
-            <article class="focus-item">
-              <div class="focus-icon">03</div>
-              <div>
-                <h3>IoT and Hardware Integration</h3>
-                <p>
-                  RFID, NFC, QR scanners, Arduino/ESP32 communication,
-                  real-time controllers and connected automation.
-                </p>
-              </div>
-            </article>
-
-            <article class="focus-item">
-              <div class="focus-icon">04</div>
-              <div>
-                <h3>Developer Tools and Packages</h3>
-                <p>
-                  Reusable Flutter packages, clean APIs, documentation and
-                  components designed for other developers.
-                </p>
-              </div>
-            </article>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="education">
-      <div class="container">
-        <header class="section-heading reveal">
-          <span class="section-tag">Education</span>
-          <h2>My academic journey from secondary education to computer science.</h2>
-          <p>
-            A progressive academic path that built my analytical thinking,
-            technical foundation and professional software-engineering skills.
-          </p>
-        </header>
-
-        <div class="education-grid">
-          <article class="education-highlight reveal">
-            <div class="education-icon" aria-hidden="true">🎓</div>
-            <div>
-              <h3>Academic Journey</h3>
-              <p>SSC 2014 • HSC 2016 • BSc in CSE 2022</p>
-            </div>
-          </article>
-
-          <div class="education-list">
-            <article class="education-item reveal">
-              <div class="education-item-head">
-                <span class="education-level">Bachelor's Degree</span>
-                <span class="education-year">2022</span>
-              </div>
-              <h3>BSc in Computer Science and Engineering</h3>
-              <p class="education-institute">Daffodil International University</p>
-              <p class="education-item-note">
-                Completed the undergraduate degree with a foundation in software engineering,
-                algorithms, databases, networking, artificial intelligence and computer systems.
-              </p>
-            </article>
-
-            <article class="education-item reveal">
-              <div class="education-item-head">
-                <span class="education-level">Higher Secondary Certificate</span>
-                <span class="education-year">2016</span>
-              </div>
-              <h3>Higher Secondary Certificate (HSC)</h3>
-              <p class="education-institute">Completed in 2016</p>
-            </article>
-
-            <article class="education-item reveal">
-              <div class="education-item-head">
-                <span class="education-level">Secondary School Certificate</span>
-                <span class="education-year">2014</span>
-              </div>
-              <h3>Secondary School Certificate (SSC)</h3>
-              <p class="education-institute">Completed in 2014</p>
-            </article>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="certifications">
-      <div class="container">
-        <header class="section-heading reveal">
-          <span class="section-tag">Training &amp; Certifications</span>
-          <h2>Verified learning in Flutter, AI engineering, augmented reality and information security.</h2>
-          <p>
-            Professional certificates and completed courses that strengthen my work in
-            mobile engineering, artificial intelligence, immersive technology and enterprise systems.
-          </p>
-        </header>
-
-        <div class="training-grid">
-          <article class="training-card reveal">
-            <div class="training-icon" aria-hidden="true">AI</div>
-            <span class="training-type">Ostad • Certificate of Assessment</span>
-            <h3>AI Engineering Bootcamp for Programmers</h3>
-            <p>
-              Successfully completed the online live AI Engineering Bootcamp for Programmers
-              with Batch 2 and received a vetted certificate of assessment.
-            </p>
-            <div class="credential-meta">
-              <div><span>Issuer</span><strong>Ostad Ltd.</strong></div>
-              <div><span>Credential ID</span><strong>A36428</strong></div>
-              <div><span>Assessment</span><strong>Quiz 94.1% • Assignment 60%</strong></div>
-            </div>
-            <div class="training-topics">
-              <span>AI Engineering</span>
-              <span>Programming</span>
-              <span>Assessment</span>
-              <span>Batch 2</span>
-            </div>
-            <div class="training-actions">
-              <a class="training-link" href="assets/ai-engineering-bootcamp-ostad.pdf" target="_blank" rel="noopener noreferrer">
-                View certificate ↗
-              </a>
-            </div>
-          </article>
-
-          <article class="training-card reveal">
-            <div class="training-icon" aria-hidden="true">ISO</div>
-            <span class="training-type">B-ADVANCY • Awareness Training</span>
-            <h3>ISO 9001:2015 (QMS) &amp; ISO 27001:2022 (ISMS)</h3>
-            <p>
-              Completed awareness training on quality management and information security
-              management systems at Pakiza Software Ltd., Dhaka.
-            </p>
-            <div class="credential-meta">
-              <div><span>Training dates</span><strong>05 February &amp; 03 March 2024</strong></div>
-              <div><span>Issue date</span><strong>20 March 2024</strong></div>
-              <div><span>Certificate No.</span><strong>BAC-PSL/2403-07</strong></div>
-            </div>
-            <div class="training-topics">
-              <span>ISO 9001:2015</span>
-              <span>QMS</span>
-              <span>ISO 27001:2022</span>
-              <span>ISMS</span>
-            </div>
-            <div class="training-actions">
-              <a class="training-link" href="assets/iso-awareness-training-b-advancy.pdf" target="_blank" rel="noopener noreferrer">
-                View certificate ↗
-              </a>
-            </div>
-          </article>
-
-          <article class="training-card reveal">
-            <div class="training-icon" aria-hidden="true">AR</div>
-            <span class="training-type">Coursera • Google AR &amp; VR</span>
-            <h3>Introduction to Augmented Reality and ARCore</h3>
-            <p>
-              Completed an online non-credit course authorized by Google AR &amp; VR
-              and offered through Coursera.
-            </p>
-            <div class="credential-meta">
-              <div><span>Completion date</span><strong>16 October 2020</strong></div>
-              <div><span>Credential ID</span><strong>AADKWKBMV4RX</strong></div>
-              <div><span>Provider</span><strong>Google AR &amp; VR / Coursera</strong></div>
-            </div>
-            <div class="training-topics">
-              <span>Augmented Reality</span>
-              <span>ARCore</span>
-              <span>Google AR &amp; VR</span>
-              <span>Coursera</span>
-            </div>
-            <div class="training-actions">
-              <a class="training-link" href="assets/introduction-to-augmented-reality-arcore-coursera.pdf" target="_blank" rel="noopener noreferrer">
-                View certificate ↗
-              </a>
-              <a class="training-link training-link-secondary" href="https://coursera.org/verify/AADKWKBMV4RX" target="_blank" rel="noopener noreferrer">
-                Verify credential ↗
-              </a>
-            </div>
-          </article>
-
-          <article class="training-card reveal">
-            <div class="training-icon" aria-hidden="true">APP</div>
-            <span class="training-type">Udemy • Certificate of Completion</span>
-            <h3>The Complete Flutter Development Bootcamp with Dart</h3>
-            <p>
-              Completed a 29-hour Flutter and Dart development course instructed by
-              Dr. Angela Yu.
-            </p>
-            <div class="credential-meta">
-              <div><span>Completion date</span><strong>11 August 2023</strong></div>
-              <div><span>Course length</span><strong>29 total hours</strong></div>
-              <div><span>Certificate No.</span><strong>UC-8aeeb52b-cad4-4ff0-902b-7b13884eee12</strong></div>
-            </div>
-            <div class="training-topics">
-              <span>Flutter</span>
-              <span>Dart</span>
-              <span>Mobile Development</span>
-              <span>Udemy</span>
-            </div>
-            <div class="training-actions">
-              <a class="training-link" href="assets/complete-flutter-development-bootcamp-udemy.pdf" target="_blank" rel="noopener noreferrer">
-                View certificate ↗
-              </a>
-              <a class="training-link training-link-secondary" href="https://ude.my/UC-8aeeb52b-cad4-4ff0-902b-7b13884eee12" target="_blank" rel="noopener noreferrer">
-                Verify credential ↗
-              </a>
-            </div>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section id="skills">
-      <div class="container">
-        <header class="section-heading reveal">
-          <span class="section-tag">Core expertise</span>
-          <h2>A multidisciplinary toolkit for building complete digital products.</h2>
-        </header>
-
-        <div class="skills-grid">
-          <article class="skill-card reveal">
-            <span class="skill-card-number">01 / MOBILE</span>
-            <h3>Mobile Development</h3>
-            <div class="chips">
-              <span class="chip">Flutter</span>
-              <span class="chip">Dart</span>
-              <span class="chip">Android Native</span>
-              <span class="chip">Kotlin</span>
-              <span class="chip">Java</span>
-              <span class="chip">Swift</span>
-              <span class="chip">React Native</span>
-            </div>
-          </article>
-
-          <article class="skill-card reveal">
-            <span class="skill-card-number">02 / ARCHITECTURE</span>
-            <h3>Application Architecture</h3>
-            <div class="chips">
-              <span class="chip">BLoC / Cubit</span>
-              <span class="chip">Clean Architecture</span>
-              <span class="chip">MVVM</span>
-              <span class="chip">GetX</span>
-              <span class="chip">Dependency Injection</span>
-              <span class="chip">Offline First</span>
-            </div>
-          </article>
-
-          <article class="skill-card reveal">
-            <span class="skill-card-number">03 / BACKEND</span>
-            <h3>Backend and APIs</h3>
-            <div class="chips">
-              <span class="chip">REST API</span>
-              <span class="chip">FastAPI</span>
-              <span class="chip">Flask</span>
-              <span class="chip">Python</span>
-              <span class="chip">Go</span>
-              <span class="chip">Socket.IO</span>
-              <span class="chip">WebSocket</span>
-            </div>
-          </article>
-
-          <article class="skill-card reveal">
-            <span class="skill-card-number">04 / ERP</span>
-            <h3>Enterprise and Data</h3>
-            <div class="chips">
-              <span class="chip">Oracle EBS</span>
-              <span class="chip">Oracle ORDS</span>
-              <span class="chip">PL/SQL</span>
-              <span class="chip">Firebase</span>
-              <span class="chip">MongoDB</span>
-              <span class="chip">Hive</span>
-              <span class="chip">SQL</span>
-            </div>
-          </article>
-
-          <article class="skill-card reveal">
-            <span class="skill-card-number">05 / AI</span>
-            <h3>AI and Computer Vision</h3>
-            <div class="chips">
-              <span class="chip">TensorFlow</span>
-              <span class="chip">TFLite</span>
-              <span class="chip">OpenCV</span>
-              <span class="chip">Scikit-learn</span>
-              <span class="chip">ML Kit</span>
-              <span class="chip">Chatbots</span>
-              <span class="chip">Model Deployment</span>
-            </div>
-          </article>
-
-          <article class="skill-card reveal">
-            <span class="skill-card-number">06 / HARDWARE</span>
-            <h3>IoT and Device Integration</h3>
-            <div class="chips">
-              <span class="chip">ESP32</span>
-              <span class="chip">MicroPython</span>
-              <span class="chip">Arduino</span>
-              <span class="chip">RFID</span>
-              <span class="chip">NFC</span>
-              <span class="chip">QR / Barcode</span>
-              <span class="chip">Thermal Printing</span>
-            </div>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section id="experience">
-      <div class="container">
-        <header class="section-heading reveal">
-          <span class="section-tag">Experience</span>
-          <h2>Building software around real operational challenges.</h2>
-        </header>
-
-        <div class="experience-layout">
-          <aside class="panel experience-summary reveal">
-            <strong>5+</strong>
-            <h3>Years in software and mobile product development</h3>
-            <p>
-              Experienced across enterprise applications, commercial mobile products,
-              AI solutions, reusable SDKs and hardware-integrated systems.
-            </p>
-          </aside>
-
-          <div class="timeline">
-            <article class="timeline-item reveal">
-              <div class="timeline-dot">NOW</div>
-              <div class="timeline-card">
-                <div class="timeline-head">
-                  <div>
-                    <h3>Software Engineer / Flutter Developer</h3>
-                    <div class="timeline-company">PRAN-RFL Group</div>
-                  </div>
-                  <span class="timeline-badge">Enterprise</span>
-                </div>
-                <p>
-                  Developing Express ERP and other mobile solutions integrated with
-                  Oracle EBS and ORDS. Working on inventory, production, quality,
-                  market operations, display room, QR workflows, printing and
-                  role-based enterprise modules.
-                </p>
-              </div>
-            </article>
-
-            <article class="timeline-item reveal">
-              <div class="timeline-dot">AI</div>
-              <div class="timeline-card">
-                <div class="timeline-head">
-                  <div>
-                    <h3>AI Application and Chatbot Development</h3>
-                    <div class="timeline-company">Product and R&amp;D Work</div>
-                  </div>
-                  <span class="timeline-badge">Innovation</span>
-                </div>
-                <p>
-                  Building intelligent chatbots, computer-vision prototypes,
-                  classification systems, interview agents and AI-powered mobile
-                  features using Python, TensorFlow, OpenCV and Flutter.
-                </p>
-              </div>
-            </article>
-
-            <article class="timeline-item reveal">
-              <div class="timeline-dot">APP</div>
-              <div class="timeline-card">
-                <div class="timeline-head">
-                  <div>
-                    <h3>Commercial Mobile Application Development</h3>
-                    <div class="timeline-company">Cross-platform Products</div>
-                  </div>
-                  <span class="timeline-badge">Mobile</span>
-                </div>
-                <p>
-                  Delivered ERP, ride-sharing, e-commerce, payment, travel and
-                  utility applications with authentication, maps, tracking,
-                  API integrations, push notifications and store deployment.
-                </p>
-              </div>
-            </article>
-
-            <article class="timeline-item reveal">
-              <div class="timeline-dot">OSS</div>
-              <div class="timeline-card">
-                <div class="timeline-head">
-                  <div>
-                    <h3>Open-source Flutter Package Author</h3>
-                    <div class="timeline-company">Pub.dev Ecosystem</div>
-                  </div>
-                  <span class="timeline-badge">Open Source</span>
-                </div>
-                <p>
-                  Creating reusable packages for PDF reading, offline REST sync,
-                  image classification, calendars, augmented reality and
-                  responsive UI development.
-                </p>
-              </div>
-            </article>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="projects">
-      <div class="container">
-        <header class="section-heading reveal">
-          <span class="section-tag">Selected work</span>
-          <h2>Projects across enterprise software, AI, mobile and IoT.</h2>
-        </header>
-
-        <div class="projects-grid">
-          <article class="project-card reveal">
-            <div class="project-top">
-              <span class="project-type">Enterprise ERP</span>
-              <h3>Express ERP</h3>
-              <p>
-                A large-scale mobile ERP platform for PRAN-RFL Group, integrating
-                Oracle EBS workflows across manufacturing, inventory, quality,
-                sales, sample management, QR operations and printing.
-              </p>
-              <div class="project-tech">
-                <span>Flutter</span><span>•</span><span>BLoC</span><span>•</span>
-                <span>Oracle ORDS</span><span>•</span><span>PL/SQL</span>
-              </div>
-            </div>
-            <div class="project-bottom">
-              <span class="project-link">Private company product</span>
-            </div>
-          </article>
-
-          <article class="project-card reveal">
-            <div class="project-top">
-              <span class="project-type">ERP Mobile App</span>
-              <h3>Cripton ERP</h3>
-              <p>
-                Enterprise resource planning mobile application designed for
-                streamlined business operations, data access and workflow management.
-              </p>
-              <div class="project-tech">
-                <span>Flutter</span><span>•</span><span>REST API</span><span>•</span>
-                <span>ERP</span>
-              </div>
-            </div>
-            <div class="project-bottom project-links">
-              <a
-                class="project-link"
-                href="https://github.com/NafimAhmed/cripton-erp"
-                target="_blank"
-                rel="noopener noreferrer"
-              >View repository ↗</a>
-            </div>
-          </article>
-
-          <article class="project-card reveal">
-            <div class="project-top">
-              <span class="project-type">E-commerce</span>
-              <h3>Enorsia</h3>
-              <p>
-                A European e-commerce mobile experience with product discovery,
-                account management, API-driven content and scalable Flutter architecture.
-              </p>
-              <div class="project-tech">
-                <span>Flutter</span><span>•</span><span>E-commerce</span><span>•</span>
-                <span>API Integration</span>
-              </div>
-            </div>
-            <div class="project-bottom project-links">
-              <a
-                class="project-link"
-                href="https://github.com/NafimAhmed/enorsia-e-commerce"
-                target="_blank"
-                rel="noopener noreferrer"
-              >View repository ↗</a>
-            </div>
-          </article>
-
-          <article class="project-card reveal">
-            <div class="project-top">
-              <span class="project-type">Artificial Intelligence</span>
-              <h3>Heart Disease Detection AI</h3>
-              <p>
-                Machine-learning project that analyzes health-related features
-                to estimate heart-disease risk and demonstrate an end-to-end
-                predictive workflow.
-              </p>
-              <div class="project-tech">
-                <span>Python</span><span>•</span><span>Scikit-learn</span><span>•</span>
-                <span>Machine Learning</span>
-              </div>
-            </div>
-            <div class="project-bottom project-links">
-              <a
-                class="project-link"
-                href="https://github.com/NafimAhmed/heart-disease-detection-AI"
-                target="_blank"
-                rel="noopener noreferrer"
-              >View repository ↗</a>
-            </div>
-          </article>
-
-          <article class="project-card reveal">
-            <div class="project-top">
-              <span class="project-type">Mobility Platform</span>
-              <h3>My Road</h3>
-              <p>
-                Ride-sharing application with Google Maps integration, real-time
-                location tracking and separate rider/driver experiences.
-              </p>
-              <div class="project-tech">
-                <span>Flutter</span><span>•</span><span>Google Maps</span><span>•</span>
-                <span>Real-time Location</span>
-              </div>
-            </div>
-            <div class="project-bottom project-links">
-              <a
-                class="project-link"
-                href="https://github.com/NafimAhmed/My_Road"
-                target="_blank"
-                rel="noopener noreferrer"
-              >Rider app ↗</a>
-              <a
-                class="project-link"
-                href="https://github.com/NafimAhmed/My_Road_Driver"
-                target="_blank"
-                rel="noopener noreferrer"
-              >Driver app ↗</a>
-            </div>
-          </article>
-
-          <article class="project-card reveal">
-            <div class="project-top">
-              <span class="project-type">Education / Open Source</span>
-              <h3>MicroPython Bangla Tutorial</h3>
-              <p>
-                A complete W3Schools-style Bangla learning website covering
-                MicroPython, ESP32, sensors, communication protocols, networking
-                and practical IoT projects.
-              </p>
-              <div class="project-tech">
-                <span>MicroPython</span><span>•</span><span>ESP32</span><span>•</span>
-                <span>HTML/CSS/JS</span>
-              </div>
-            </div>
-            <div class="project-bottom project-links">
-              <a
-                class="project-link"
-                href="https://nafimahmed.github.io/NafimAhmed-micropython-bangla-tutorial/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >Live website ↗</a>
-              <a
-                class="project-link"
-                href="https://github.com/NafimAhmed/NafimAhmed-micropython-bangla-tutorial"
-                target="_blank"
-                rel="noopener noreferrer"
-              >Repository ↗</a>
-            </div>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section id="packages">
-      <div class="container">
-        <header class="section-heading reveal">
-          <span class="section-tag">Open source</span>
-          <h2>Flutter packages created for practical developer needs.</h2>
-        </header>
-
-        <div class="packages-grid">
-          <article class="package-card reveal">
-            <div class="package-icon">PDF</div>
-            <h3>ai_pdf_reader</h3>
-            <p>
-              PDF text extraction, text-to-speech, highlighting, reading position
-              and controller-based document reading.
-            </p>
-            <a href="https://pub.dev/packages/ai_pdf_reader" target="_blank" rel="noopener noreferrer">
-              View on pub.dev ↗
-            </a>
-          </article>
-
-          <article class="package-card reveal">
-            <div class="package-icon">SYNC</div>
-            <h3>easy_rest_sync</h3>
-            <p>
-              Offline-first REST synchronization for Flutter with local persistence,
-              streaming and conflict-ready application workflows.
-            </p>
-            <a href="https://pub.dev/packages/easy_rest_sync" target="_blank" rel="noopener noreferrer">
-              View on pub.dev ↗
-            </a>
-          </article>
-
-          <article class="package-card reveal">
-            <div class="package-icon">AI</div>
-            <h3>flutter_tflite_image_classification_engine</h3>
-            <p>
-              Flexible TFLite image and frame classification engine with configurable
-              preprocessing and real-time stream support.
-            </p>
-            <a
-              href="https://pub.dev/packages/flutter_tflite_image_classification_engine"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              View on pub.dev ↗
-            </a>
-          </article>
-
-          <article class="package-card reveal">
-            <div class="package-icon">CAL</div>
-            <h3>linear_calender</h3>
-            <p>
-              Customizable linear calendar widget with flexible dates, selection,
-              sizing, borders, styles and behavior.
-            </p>
-            <a href="https://pub.dev/packages/linear_calender" target="_blank" rel="noopener noreferrer">
-              View on pub.dev ↗
-            </a>
-          </article>
-
-          <article class="package-card reveal">
-            <div class="package-icon">AR</div>
-            <h3>ar_tryon_view</h3>
-            <p>
-              Augmented-reality try-on component designed for interactive
-              face-mask and visual overlay experiences.
-            </p>
-            <a href="https://pub.dev/packages/ar_tryon_view" target="_blank" rel="noopener noreferrer">
-              View on pub.dev ↗
-            </a>
-          </article>
-
-          <article class="package-card reveal">
-            <div class="package-icon">UI</div>
-            <h3>absolute_sizer</h3>
-            <p>
-              Responsive sizing utility for building consistent Flutter interfaces
-              across different screen dimensions.
-            </p>
-            <a href="https://pub.dev/packages/absolute_sizer" target="_blank" rel="noopener noreferrer">
-              View on pub.dev ↗
-            </a>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section id="publications">
-      <div class="container">
-        <header class="section-heading reveal">
-          <span class="section-tag">Research</span>
-          <h2>Published work in intelligent systems and computing.</h2>
-        </header>
-
-        <div class="publications">
-          <article class="publication-card reveal">
-            <div class="publication-year">2022</div>
-            <div>
-              <h3>Traffic Flow Forecasting in Intelligent Transportation Systems</h3>
-              <p>
-                IEEE publication focused on data-driven traffic analysis and
-                forecasting within intelligent transportation environments.
-              </p>
-            </div>
-          </article>
-
-          <article class="publication-card reveal">
-            <div class="publication-year">2023</div>
-            <div>
-              <h3>Bucket Filling Algorithm</h3>
-              <p>
-                Research publication in Asian Social Science Research presenting
-                an algorithmic approach to structured bucket-filling problems.
-              </p>
-            </div>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section id="contact">
-      <div class="container">
-        <div class="contact-card reveal">
-          <div class="contact-copy">
-            <span class="section-tag">Contact</span>
-            <h2>Let’s build something meaningful.</h2>
-            <p>
-              I’m interested in challenging software engineering roles,
-              enterprise mobile products, AI-powered applications and innovative
-              IoT or automation projects.
-            </p>
-
-            <div class="hero-buttons">
-              <a class="btn btn-primary" href="mailto:recentnafimahmed@gmail.com">
-                Send an email
-              </a>
-              <a
-                class="btn btn-secondary"
-                href="assets/Nafim_Ahmed_CV.pdf"
-                download="Nafim_Ahmed_CV.pdf"
-                aria-label="Download Nafim Ahmed CV as PDF"
-              >
-                Download CV <span aria-hidden="true">↓</span>
-              </a>
-              <a
-                class="btn btn-secondary"
-                href="https://www.linkedin.com/in/nafim-ahmed-recent/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Connect on LinkedIn
-              </a>
-            </div>
-          </div>
-
-          <div class="contact-list">
-            <a class="contact-item" href="mailto:recentnafimahmed@gmail.com">
-              <span class="contact-icon">@</span>
-              <span>
-                <small>Email</small>
-                <strong>recentnafimahmed@gmail.com</strong>
-              </span>
-            </a>
-
-            <a
-              class="contact-item"
-              href="https://wa.me/8801797609439"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Chat with Nafim Ahmed on WhatsApp at +880 1797-609439"
-            >
-              <span class="contact-icon">WA</span>
-              <span>
-                <small>Cell and WhatsApp</small>
-                <strong>+880 1797-609439</strong>
-              </span>
-            </a>
-
-            <a
-              class="contact-item"
-              href="https://github.com/NafimAhmed"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <span class="contact-icon">GH</span>
-              <span>
-                <small>GitHub</small>
-                <strong>github.com/NafimAhmed</strong>
-              </span>
-            </a>
-
-            <a
-              class="contact-item"
-              href="https://www.linkedin.com/in/nafim-ahmed-recent/"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <span class="contact-icon">in</span>
-              <span>
-                <small>LinkedIn</small>
-                <strong>nafim-ahmed-recent</strong>
-              </span>
-            </a>
-
-            <div class="contact-item">
-              <span class="contact-icon">⌖</span>
-              <span>
-                <small>Location</small>
-                <strong>Dhaka, Bangladesh</strong>
-              </span>
-            </div>
-
-            <a
-              class="contact-item"
-              href="https://github.com/NafimAhmed?tab=repositories"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <span class="contact-icon">&lt;/&gt;</span>
-              <span>
-                <small>Code portfolio</small>
-                <strong>Explore repositories</strong>
-              </span>
-            </a>
-          </div>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <footer>
-    <div class="container footer-inner">
-      <p>© <span id="year"></span> Nafim Ahmed. Designed and built with care.</p>
-      <div class="footer-links">
-        <a href="#home">Back to home</a>
-        <a href="mailto:recentnafimahmed@gmail.com">Email</a>
-        <a href="assets/Nafim_Ahmed_CV.pdf" download="Nafim_Ahmed_CV.pdf">Download CV</a>
-        <a href="https://github.com/NafimAhmed" target="_blank" rel="noopener noreferrer">GitHub</a>
-        <a
-          href="https://www.linkedin.com/in/nafim-ahmed-recent/"
-          target="_blank"
-          rel="noopener noreferrer"
-        >LinkedIn</a>
-      </div>
-    </div>
-  </footer>
-
-  <button class="back-to-top" id="backToTop" type="button" aria-label="Back to top">
-    ↑
-  </button>
-
-  <script>
-    const body = document.body;
-    const navbar = document.getElementById("navbar");
-    const navLinks = document.getElementById("navLinks");
-    const menuButton = document.getElementById("menuButton");
-    const themeToggle = document.getElementById("themeToggle");
-    const themeIcon = document.getElementById("themeIcon");
-    const backToTop = document.getElementById("backToTop");
-    const typedText = document.getElementById("typedText");
-
-    document.getElementById("year").textContent = new Date().getFullYear();
-
-    const savedTheme = localStorage.getItem("portfolio-theme");
-    if (savedTheme === "light") {
-      body.classList.add("light");
-      themeIcon.textContent = "☀";
-    }
-
-    themeToggle.addEventListener("click", () => {
-      body.classList.toggle("light");
-      const isLight = body.classList.contains("light");
-      themeIcon.textContent = isLight ? "☀" : "☾";
-      localStorage.setItem("portfolio-theme", isLight ? "light" : "dark");
-    });
-
-    menuButton.addEventListener("click", () => {
-      const isOpen = navLinks.classList.toggle("open");
-      menuButton.setAttribute("aria-expanded", String(isOpen));
-      menuButton.querySelector("span").textContent = isOpen ? "✕" : "☰";
-    });
-
-    document.querySelectorAll(".nav-links a").forEach((link) => {
-      link.addEventListener("click", () => {
-        navLinks.classList.remove("open");
-        menuButton.setAttribute("aria-expanded", "false");
-        menuButton.querySelector("span").textContent = "☰";
-      });
-    });
-
-    const phrases = [
-      "scalable Flutter applications",
-      "enterprise ERP mobile solutions",
-      "AI-powered product experiences",
-      "connected IoT and automation systems",
-      "developer-friendly Flutter packages"
-    ];
-
-    let phraseIndex = 0;
-    let characterIndex = phrases[0].length;
-    let deleting = true;
-
-    function typeLoop() {
-      const phrase = phrases[phraseIndex];
-
-      if (deleting) {
-        characterIndex--;
-        typedText.textContent = phrase.slice(0, characterIndex);
-
-        if (characterIndex === 0) {
-          deleting = false;
-          phraseIndex = (phraseIndex + 1) % phrases.length;
-          setTimeout(typeLoop, 420);
-          return;
-        }
-      } else {
-        characterIndex++;
-        typedText.textContent = phrases[phraseIndex].slice(0, characterIndex);
-
-        if (characterIndex === phrases[phraseIndex].length) {
-          deleting = true;
-          setTimeout(typeLoop, 1800);
-          return;
-        }
-      }
-
-      setTimeout(typeLoop, deleting ? 38 : 58);
-    }
-
-    setTimeout(typeLoop, 1500);
-
-    const revealObserver = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("visible");
-            revealObserver.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.12 }
-    );
-
-    document.querySelectorAll(".reveal").forEach((element) => {
-      revealObserver.observe(element);
-    });
-
-    const sections = [...document.querySelectorAll("main section[id]")];
-    const navAnchors = [...document.querySelectorAll(".nav-links a")];
-
-    function updateNavigation() {
-      navbar.classList.toggle("scrolled", window.scrollY > 10);
-      backToTop.classList.toggle("show", window.scrollY > 650);
-
-      const scrollPosition = window.scrollY + 140;
-      let currentSection = "home";
-
-      sections.forEach((section) => {
-        if (scrollPosition >= section.offsetTop) {
-          currentSection = section.id;
-        }
-      });
-
-      navAnchors.forEach((anchor) => {
-        anchor.classList.toggle(
-          "active",
-          anchor.getAttribute("href") === `#${currentSection}`
-        );
-      });
-    }
-
-    window.addEventListener("scroll", updateNavigation, { passive: true });
-    updateNavigation();
-
-    backToTop.addEventListener("click", () => {
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    });
-
-    document.addEventListener("click", (event) => {
-      const clickedInsideMenu =
-        navLinks.contains(event.target) || menuButton.contains(event.target);
-
-      if (!clickedInsideMenu && navLinks.classList.contains("open")) {
-        navLinks.classList.remove("open");
-        menuButton.setAttribute("aria-expanded", "false");
-        menuButton.querySelector("span").textContent = "☰";
-      }
-    });
-  </script>
-</body>
-</html> -->
-
-
-
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6069,4 +3082,3172 @@
     });
   </script>
 </body>
+</html> -->
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta
+    name="description"
+    content="Portfolio of Nafim Ahmed — Software Engineer, Flutter Developer, ERP Mobile App Developer, AI Engineer and IoT enthusiast."
+  />
+  <meta name="theme-color" content="#07111f" />
+  <title>Nafim Ahmed | Software Engineer</title>
+
+  <style>
+    :root {
+      --bg: #07111f;
+      --bg-soft: #0c1828;
+      --surface: rgba(15, 30, 49, 0.82);
+      --surface-solid: #0f1e31;
+      --surface-light: #142840;
+      --text: #f5f7fb;
+      --muted: #aab6c6;
+      --primary: #25d99a;
+      --primary-dark: #12aa76;
+      --secondary: #58a6ff;
+      --border: rgba(255, 255, 255, 0.1);
+      --shadow: 0 22px 65px rgba(0, 0, 0, 0.28);
+      --radius: 22px;
+      --nav-height: 74px;
+      --max-width: 1180px;
+    }
+
+    body.light {
+      --bg: #f4f7fb;
+      --bg-soft: #eaf0f7;
+      --surface: rgba(255, 255, 255, 0.9);
+      --surface-solid: #ffffff;
+      --surface-light: #f1f5f9;
+      --text: #122033;
+      --muted: #5f6f82;
+      --border: rgba(15, 23, 42, 0.12);
+      --shadow: 0 22px 65px rgba(38, 57, 77, 0.12);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: calc(var(--nav-height) + 18px);
+    }
+
+    body {
+      min-height: 100vh;
+      overflow-x: hidden;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 14% 16%, rgba(37, 217, 154, 0.12), transparent 28%),
+        radial-gradient(circle at 88% 12%, rgba(88, 166, 255, 0.13), transparent 30%),
+        var(--bg);
+      font-family:
+        Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+        "Segoe UI", sans-serif;
+      line-height: 1.7;
+      transition: background 0.3s ease, color 0.3s ease;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button,
+    input,
+    textarea {
+      font: inherit;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    .container {
+      width: min(calc(100% - 40px), var(--max-width));
+      margin-inline: auto;
+    }
+
+    .skip-link {
+      position: fixed;
+      left: 16px;
+      top: -80px;
+      z-index: 1000;
+      padding: 10px 14px;
+      border-radius: 10px;
+      background: var(--primary);
+      color: #04120d;
+      font-weight: 800;
+      transition: top 0.2s;
+    }
+
+    .skip-link:focus {
+      top: 16px;
+    }
+
+    .navbar {
+      position: fixed;
+      inset: 0 0 auto 0;
+      z-index: 100;
+      height: var(--nav-height);
+      border-bottom: 1px solid transparent;
+      background: rgba(7, 17, 31, 0.66);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      transition: border-color 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    body.light .navbar {
+      background: rgba(244, 247, 251, 0.78);
+    }
+
+    .navbar.scrolled {
+      border-color: var(--border);
+      box-shadow: 0 10px 35px rgba(0, 0, 0, 0.13);
+    }
+
+    .nav-inner {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 28px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 1.02rem;
+      font-weight: 850;
+      letter-spacing: -0.02em;
+    }
+
+    .brand-mark {
+      width: 42px;
+      aspect-ratio: 1;
+      display: grid;
+      place-items: center;
+      border-radius: 13px;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: #04120d;
+      box-shadow: 0 10px 30px rgba(37, 217, 154, 0.25);
+    }
+
+    .brand-mark span {
+      font-size: 1rem;
+      font-weight: 950;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      position: relative;
+      display: inline-flex;
+      padding: 10px 11px;
+      color: var(--muted);
+      font-size: 0.9rem;
+      font-weight: 700;
+      transition: color 0.2s ease;
+    }
+
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      left: 12px;
+      right: 12px;
+      bottom: 4px;
+      height: 2px;
+      transform: scaleX(0);
+      border-radius: 5px;
+      background: var(--primary);
+      transition: transform 0.2s ease;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--text);
+    }
+
+    .nav-links a.active::after {
+      transform: scaleX(1);
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .icon-button,
+    .menu-button {
+      width: 43px;
+      height: 43px;
+      display: grid;
+      place-items: center;
+      border: 1px solid var(--border);
+      border-radius: 13px;
+      background: var(--surface);
+      color: var(--text);
+      cursor: pointer;
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+
+    .icon-button:hover,
+    .menu-button:hover {
+      transform: translateY(-2px);
+      border-color: rgba(37, 217, 154, 0.55);
+    }
+
+    .menu-button {
+      display: none;
+    }
+
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: calc(var(--nav-height) + 50px) 0 70px;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      width: 480px;
+      height: 480px;
+      left: -280px;
+      bottom: 40px;
+      border: 1px solid rgba(37, 217, 154, 0.16);
+      border-radius: 50%;
+      box-shadow:
+        0 0 0 70px rgba(37, 217, 154, 0.025),
+        0 0 0 140px rgba(37, 217, 154, 0.018);
+      pointer-events: none;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.3fr) minmax(300px, 0.7fr);
+      align-items: center;
+      gap: clamp(40px, 8vw, 100px);
+    }
+
+    .availability {
+      width: fit-content;
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      padding: 8px 13px;
+      border: 1px solid rgba(37, 217, 154, 0.28);
+      border-radius: 999px;
+      color: var(--primary);
+      background: rgba(37, 217, 154, 0.07);
+      font-size: 0.84rem;
+      font-weight: 800;
+      margin-bottom: 22px;
+    }
+
+    .pulse {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: var(--primary);
+      box-shadow: 0 0 0 0 rgba(37, 217, 154, 0.55);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      70% {
+        box-shadow: 0 0 0 9px rgba(37, 217, 154, 0);
+      }
+      100% {
+        box-shadow: 0 0 0 0 rgba(37, 217, 154, 0);
+      }
+    }
+
+    .eyebrow {
+      color: var(--primary);
+      font-size: clamp(0.94rem, 2vw, 1.08rem);
+      font-weight: 850;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+    }
+
+    .hero h1 {
+      max-width: 790px;
+      margin: 14px 0 18px;
+      font-size: clamp(3.4rem, 8.2vw, 7.1rem);
+      line-height: 0.93;
+      letter-spacing: -0.065em;
+    }
+
+    .gradient-text {
+      color: transparent;
+      background: linear-gradient(120deg, var(--primary), #8fffd5 45%, var(--secondary));
+      -webkit-background-clip: text;
+      background-clip: text;
+    }
+
+    .typing-line {
+      min-height: 36px;
+      color: var(--muted);
+      font-size: clamp(1.12rem, 2.3vw, 1.55rem);
+      font-weight: 700;
+    }
+
+    .typed-text {
+      color: var(--text);
+    }
+
+    .cursor {
+      color: var(--primary);
+      animation: blink 0.72s infinite;
+    }
+
+    @keyframes blink {
+      50% { opacity: 0; }
+    }
+
+    .hero-description {
+      max-width: 680px;
+      margin-top: 22px;
+      color: var(--muted);
+      font-size: 1.03rem;
+    }
+
+    .hero-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 13px;
+      margin-top: 31px;
+    }
+
+    .btn {
+      min-height: 49px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      padding: 0 19px;
+      border: 1px solid transparent;
+      border-radius: 14px;
+      font-weight: 850;
+      transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        border-color 0.2s ease,
+        background 0.2s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-3px);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--primary), #72f1c5);
+      color: #04130d;
+      box-shadow: 0 13px 35px rgba(37, 217, 154, 0.22);
+    }
+
+    .btn-secondary {
+      border-color: var(--border);
+      background: var(--surface);
+      color: var(--text);
+    }
+
+    .quick-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px 21px;
+      margin-top: 29px;
+      color: var(--muted);
+      font-size: 0.92rem;
+      font-weight: 700;
+    }
+
+    .quick-links a {
+      transition: color 0.2s ease;
+    }
+
+    .quick-links a:hover {
+      color: var(--primary);
+    }
+
+    .profile-wrap {
+      position: relative;
+      width: min(100%, 420px);
+      margin-inline: auto;
+    }
+
+    .profile-wrap::before {
+      content: "";
+      position: absolute;
+      inset: -18px;
+      border: 1px solid rgba(37, 217, 154, 0.24);
+      border-radius: 34px;
+      transform: rotate(5deg);
+      z-index: -1;
+    }
+
+    .profile-card {
+      position: relative;
+      overflow: hidden;
+      padding: 18px;
+      border: 1px solid var(--border);
+      border-radius: 30px;
+      background: var(--surface);
+      box-shadow: var(--shadow);
+    }
+
+    .profile-card::after {
+      content: "";
+      position: absolute;
+      width: 220px;
+      height: 220px;
+      top: -110px;
+      right: -90px;
+      border-radius: 50%;
+      background: rgba(88, 166, 255, 0.15);
+      filter: blur(8px);
+    }
+
+    .profile-image {
+      position: relative;
+      overflow: hidden;
+      aspect-ratio: 1 / 1.04;
+      border-radius: 22px;
+      background:
+        linear-gradient(145deg, rgba(37, 217, 154, 0.18), rgba(88, 166, 255, 0.18)),
+        var(--surface-light);
+    }
+
+    .profile-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .profile-info {
+      padding: 20px 5px 6px;
+    }
+
+    .profile-info h2 {
+      font-size: 1.42rem;
+      letter-spacing: -0.025em;
+    }
+
+    .profile-info p {
+      margin-top: 5px;
+      color: var(--muted);
+    }
+
+    .profile-meta {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .meta-item {
+      padding: 12px;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.025);
+    }
+
+    .meta-label {
+      display: block;
+      color: var(--muted);
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .meta-value {
+      display: block;
+      margin-top: 4px;
+      font-size: 0.9rem;
+      font-weight: 850;
+    }
+
+    .stats {
+      position: relative;
+      z-index: 3;
+      margin-top: -20px;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+      padding: 15px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: var(--surface);
+      backdrop-filter: blur(16px);
+      box-shadow: var(--shadow);
+    }
+
+    .stat {
+      padding: 20px;
+      text-align: center;
+      border-radius: 17px;
+      background: rgba(255, 255, 255, 0.025);
+    }
+
+    .stat strong {
+      display: block;
+      color: var(--primary);
+      font-size: clamp(1.7rem, 3vw, 2.25rem);
+      line-height: 1.15;
+    }
+
+    .stat span {
+      display: block;
+      margin-top: 6px;
+      color: var(--muted);
+      font-size: 0.86rem;
+      font-weight: 750;
+    }
+
+    section {
+      padding: 105px 0;
+    }
+
+    .section-heading {
+      max-width: 730px;
+      margin-bottom: 45px;
+    }
+
+    .section-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--primary);
+      font-size: 0.82rem;
+      font-weight: 900;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .section-tag::before {
+      content: "";
+      width: 28px;
+      height: 2px;
+      border-radius: 8px;
+      background: var(--primary);
+    }
+
+    .section-heading h2 {
+      margin-top: 13px;
+      font-size: clamp(2.15rem, 5vw, 3.8rem);
+      line-height: 1.08;
+      letter-spacing: -0.045em;
+    }
+
+    .section-heading p {
+      margin-top: 15px;
+      color: var(--muted);
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 0.95fr 1.05fr;
+      gap: 28px;
+    }
+
+    .panel {
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: var(--surface);
+      box-shadow: var(--shadow);
+    }
+
+    .about-copy {
+      padding: clamp(25px, 5vw, 44px);
+    }
+
+    .about-copy p {
+      color: var(--muted);
+      margin-top: 16px;
+    }
+
+    .about-copy p:first-of-type {
+      margin-top: 0;
+      color: var(--text);
+      font-size: 1.08rem;
+      font-weight: 650;
+    }
+
+    .focus-list {
+      display: grid;
+      gap: 14px;
+      padding: 24px;
+    }
+
+    .focus-item {
+      display: grid;
+      grid-template-columns: 48px 1fr;
+      gap: 15px;
+      align-items: start;
+      padding: 18px;
+      border: 1px solid var(--border);
+      border-radius: 17px;
+      background: rgba(255, 255, 255, 0.025);
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+
+    .focus-item:hover {
+      transform: translateX(5px);
+      border-color: rgba(37, 217, 154, 0.4);
+    }
+
+    .focus-icon {
+      width: 48px;
+      aspect-ratio: 1;
+      display: grid;
+      place-items: center;
+      border-radius: 14px;
+      color: var(--primary);
+      background: rgba(37, 217, 154, 0.09);
+      font-size: 1.25rem;
+      font-weight: 900;
+    }
+
+    .focus-item h3 {
+      font-size: 1rem;
+    }
+
+    .focus-item p {
+      margin-top: 5px;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .education-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 0.34fr) minmax(0, 0.66fr);
+      gap: 22px;
+      align-items: stretch;
+    }
+
+    .education-highlight {
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 290px;
+      padding: clamp(28px, 5vw, 45px);
+      border: 1px solid rgba(37, 217, 154, 0.28);
+      border-radius: var(--radius);
+      background:
+        linear-gradient(145deg, rgba(37, 217, 154, 0.14), transparent 62%),
+        var(--surface);
+      box-shadow: var(--shadow);
+    }
+
+    .education-highlight::after {
+      content: "";
+      position: absolute;
+      width: 210px;
+      height: 210px;
+      right: -100px;
+      bottom: -105px;
+      border: 1px solid rgba(88, 166, 255, 0.24);
+      border-radius: 50%;
+      box-shadow: 0 0 0 45px rgba(88, 166, 255, 0.025);
+    }
+
+    .education-icon {
+      position: relative;
+      z-index: 1;
+      width: 62px;
+      height: 62px;
+      display: grid;
+      place-items: center;
+      border-radius: 18px;
+      color: #04130d;
+      background: linear-gradient(135deg, var(--primary), #8fffd5);
+      font-size: 1.6rem;
+      box-shadow: 0 13px 30px rgba(37, 217, 154, 0.2);
+    }
+
+    .education-highlight h3 {
+      position: relative;
+      z-index: 1;
+      margin-top: 30px;
+      font-size: clamp(1.7rem, 4vw, 2.45rem);
+      line-height: 1.12;
+      letter-spacing: -0.04em;
+    }
+
+    .education-highlight p {
+      position: relative;
+      z-index: 1;
+      margin-top: 12px;
+      color: var(--muted);
+    }
+
+    .education-card {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: clamp(28px, 5vw, 46px);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: var(--surface);
+      box-shadow: var(--shadow);
+    }
+
+    .education-degree {
+      color: var(--primary);
+      font-size: 0.82rem;
+      font-weight: 900;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .education-card h3 {
+      margin-top: 12px;
+      font-size: clamp(1.65rem, 3.5vw, 2.5rem);
+      line-height: 1.15;
+      letter-spacing: -0.035em;
+    }
+
+    .education-institute {
+      margin-top: 8px;
+      color: var(--secondary);
+      font-size: 1.04rem;
+      font-weight: 850;
+    }
+
+    .education-description {
+      margin-top: 17px;
+      color: var(--muted);
+    }
+
+    .education-meta {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 11px;
+      margin-top: 25px;
+    }
+
+    .education-meta-item {
+      padding: 14px;
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      background: rgba(255, 255, 255, 0.025);
+    }
+
+    .education-meta-item small {
+      display: block;
+      color: var(--muted);
+      font-size: 0.7rem;
+      font-weight: 800;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+    }
+
+    .education-meta-item strong {
+      display: block;
+      margin-top: 5px;
+      font-size: 0.9rem;
+      line-height: 1.4;
+    }
+
+    .education-list {
+      display: grid;
+      gap: 16px;
+    }
+
+    .education-item {
+      position: relative;
+      overflow: hidden;
+      padding: 25px;
+      border: 1px solid var(--border);
+      border-radius: 19px;
+      background: var(--surface);
+      box-shadow: var(--shadow);
+      transition: transform 0.22s ease, border-color 0.22s ease;
+    }
+
+    .education-item:hover {
+      transform: translateY(-5px);
+      border-color: rgba(37, 217, 154, 0.42);
+    }
+
+    .education-item::after {
+      content: "";
+      position: absolute;
+      width: 120px;
+      height: 120px;
+      right: -65px;
+      bottom: -70px;
+      border-radius: 50%;
+      background: rgba(88, 166, 255, 0.055);
+      pointer-events: none;
+    }
+
+    .education-item-head {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+    .education-level {
+      display: inline-flex;
+      padding: 6px 10px;
+      border: 1px solid rgba(37, 217, 154, 0.25);
+      border-radius: 999px;
+      color: var(--primary);
+      background: rgba(37, 217, 154, 0.065);
+      font-size: 0.74rem;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .education-year {
+      flex: 0 0 auto;
+      color: var(--secondary);
+      font-size: 1.2rem;
+      font-weight: 950;
+      letter-spacing: -0.03em;
+    }
+
+    .education-item h3 {
+      position: relative;
+      z-index: 1;
+      margin-top: 13px;
+      font-size: 1.25rem;
+      line-height: 1.3;
+    }
+
+    .education-item .education-institute {
+      position: relative;
+      z-index: 1;
+      margin-top: 6px;
+      color: var(--muted);
+      font-size: 0.93rem;
+      font-weight: 750;
+    }
+
+    .education-item-note {
+      position: relative;
+      z-index: 1;
+      margin-top: 11px;
+      color: var(--muted);
+      font-size: 0.88rem;
+    }
+
+    .training-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+    }
+
+    .training-card {
+      position: relative;
+      overflow: hidden;
+      min-height: 390px;
+      display: flex;
+      flex-direction: column;
+      padding: 27px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background:
+        linear-gradient(145deg, rgba(88, 166, 255, 0.055), transparent 58%),
+        var(--surface);
+      transition: transform 0.24s ease, border-color 0.24s ease;
+    }
+
+    .training-card:nth-child(2) {
+      background:
+        linear-gradient(145deg, rgba(37, 217, 154, 0.07), transparent 58%),
+        var(--surface);
+    }
+
+    .training-card:hover {
+      transform: translateY(-7px);
+      border-color: rgba(88, 166, 255, 0.45);
+    }
+
+    .training-icon {
+      width: 50px;
+      height: 50px;
+      display: grid;
+      place-items: center;
+      border-radius: 15px;
+      color: var(--secondary);
+      background: rgba(88, 166, 255, 0.1);
+      font-size: 1.15rem;
+      font-weight: 950;
+    }
+
+    .training-card:nth-child(2) .training-icon {
+      color: var(--primary);
+      background: rgba(37, 217, 154, 0.09);
+    }
+
+    .training-type {
+      width: fit-content;
+      margin-top: 20px;
+      color: var(--primary);
+      font-size: 0.74rem;
+      font-weight: 900;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .training-card h3 {
+      margin-top: 9px;
+      font-size: 1.25rem;
+      line-height: 1.3;
+    }
+
+    .training-card p {
+      flex: 1;
+      margin-top: 12px;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .training-topics {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 20px;
+    }
+
+    .training-topics span {
+      padding: 6px 9px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      color: var(--muted);
+      background: rgba(255, 255, 255, 0.025);
+      font-size: 0.73rem;
+      font-weight: 750;
+    }
+
+    .credential-meta {
+      display: grid;
+      gap: 9px;
+      margin-top: 20px;
+    }
+
+    .credential-meta div {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 14px;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .credential-meta div:last-child {
+      border-bottom: 0;
+    }
+
+    .credential-meta span {
+      flex: 0 0 auto;
+      color: var(--muted);
+      font-size: 0.74rem;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .credential-meta strong {
+      text-align: right;
+      font-size: 0.82rem;
+      line-height: 1.45;
+      overflow-wrap: anywhere;
+    }
+
+    .training-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 22px;
+    }
+
+    .training-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 40px;
+      padding: 0 13px;
+      border: 1px solid rgba(37, 217, 154, 0.28);
+      border-radius: 11px;
+      color: var(--primary);
+      background: rgba(37, 217, 154, 0.065);
+      font-size: 0.8rem;
+      font-weight: 850;
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+
+    .training-link:hover {
+      transform: translateY(-2px);
+      border-color: rgba(37, 217, 154, 0.58);
+    }
+
+    .training-link-secondary {
+      color: var(--secondary);
+      border-color: rgba(88, 166, 255, 0.28);
+      background: rgba(88, 166, 255, 0.065);
+    }
+
+    .training-link-secondary:hover {
+      border-color: rgba(88, 166, 255, 0.58);
+    }
+
+    .credential-note {
+      display: flex;
+      align-items: flex-start;
+      gap: 13px;
+      margin-top: 18px;
+      padding: 18px 20px;
+      border: 1px dashed rgba(37, 217, 154, 0.32);
+      border-radius: 17px;
+      color: var(--muted);
+      background: rgba(37, 217, 154, 0.045);
+      font-size: 0.88rem;
+    }
+
+    .credential-note strong {
+      color: var(--text);
+    }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .skill-card {
+      padding: 27px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: var(--surface);
+      transition: transform 0.24s ease, border-color 0.24s ease;
+    }
+
+    .skill-card:hover {
+      transform: translateY(-7px);
+      border-color: rgba(37, 217, 154, 0.42);
+    }
+
+    .skill-card-number {
+      color: var(--primary);
+      font-size: 0.78rem;
+      font-weight: 950;
+      letter-spacing: 0.1em;
+    }
+
+    .skill-card h3 {
+      margin-top: 10px;
+      font-size: 1.22rem;
+    }
+
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+      margin-top: 18px;
+    }
+
+    .chip {
+      padding: 7px 10px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      color: var(--muted);
+      background: rgba(255, 255, 255, 0.025);
+      font-size: 0.78rem;
+      font-weight: 750;
+    }
+
+    .experience-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 0.72fr) minmax(0, 1.28fr);
+      gap: 24px;
+      align-items: start;
+    }
+
+    .experience-summary {
+      position: sticky;
+      top: calc(var(--nav-height) + 24px);
+      padding: 32px;
+    }
+
+    .experience-summary strong {
+      display: block;
+      color: var(--primary);
+      font-size: 3rem;
+      line-height: 1;
+      letter-spacing: -0.06em;
+    }
+
+    .experience-summary h3 {
+      margin-top: 14px;
+      font-size: 1.35rem;
+    }
+
+    .experience-summary p {
+      margin-top: 12px;
+      color: var(--muted);
+    }
+
+    .timeline {
+      position: relative;
+      display: grid;
+      gap: 16px;
+    }
+
+    .timeline::before {
+      content: "";
+      position: absolute;
+      left: 23px;
+      top: 30px;
+      bottom: 30px;
+      width: 2px;
+      background: linear-gradient(var(--primary), rgba(88, 166, 255, 0.25));
+    }
+
+    .timeline-item {
+      position: relative;
+      display: grid;
+      grid-template-columns: 48px 1fr;
+      gap: 17px;
+    }
+
+    .timeline-dot {
+      position: relative;
+      z-index: 1;
+      width: 48px;
+      height: 48px;
+      display: grid;
+      place-items: center;
+      border: 5px solid var(--bg);
+      border-radius: 50%;
+      color: #04130d;
+      background: var(--primary);
+      font-size: 0.78rem;
+      font-weight: 950;
+    }
+
+    .timeline-card {
+      padding: 25px;
+      border: 1px solid var(--border);
+      border-radius: 19px;
+      background: var(--surface);
+    }
+
+    .timeline-head {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 15px;
+    }
+
+    .timeline-card h3 {
+      font-size: 1.13rem;
+    }
+
+    .timeline-company {
+      margin-top: 3px;
+      color: var(--primary);
+      font-weight: 800;
+    }
+
+    .timeline-badge {
+      flex: 0 0 auto;
+      padding: 6px 10px;
+      border-radius: 999px;
+      color: var(--secondary);
+      background: rgba(88, 166, 255, 0.09);
+      font-size: 0.73rem;
+      font-weight: 850;
+    }
+
+    .timeline-card p {
+      margin-top: 13px;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+
+    .project-card {
+      position: relative;
+      min-height: 330px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 31px;
+      border: 1px solid var(--border);
+      border-radius: 25px;
+      background:
+        linear-gradient(145deg, rgba(37, 217, 154, 0.055), transparent 52%),
+        var(--surface);
+      transition: transform 0.25s ease, border-color 0.25s ease;
+    }
+
+    .project-card:nth-child(2n) {
+      background:
+        linear-gradient(145deg, rgba(88, 166, 255, 0.07), transparent 52%),
+        var(--surface);
+    }
+
+    .project-card::after {
+      content: "";
+      position: absolute;
+      right: -45px;
+      bottom: -60px;
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      background: rgba(37, 217, 154, 0.055);
+      transition: transform 0.3s ease;
+    }
+
+    .project-card:hover {
+      transform: translateY(-8px);
+      border-color: rgba(37, 217, 154, 0.42);
+    }
+
+    .project-card:hover::after {
+      transform: scale(1.15);
+    }
+
+    .project-top,
+    .project-bottom {
+      position: relative;
+      z-index: 2;
+    }
+
+    .project-type {
+      display: inline-flex;
+      padding: 7px 10px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      color: var(--primary);
+      font-size: 0.74rem;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .project-card h3 {
+      margin-top: 19px;
+      font-size: clamp(1.55rem, 3vw, 2.1rem);
+      line-height: 1.13;
+      letter-spacing: -0.035em;
+    }
+
+    .project-card p {
+      margin-top: 13px;
+      color: var(--muted);
+      font-size: 0.94rem;
+    }
+
+    .project-tech {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 20px;
+    }
+
+    .project-tech span {
+      color: var(--muted);
+      font-size: 0.78rem;
+      font-weight: 750;
+    }
+
+    .project-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 27px;
+    }
+
+    .project-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      color: var(--text);
+      font-size: 0.88rem;
+      font-weight: 850;
+    }
+
+    .project-link:hover {
+      color: var(--primary);
+    }
+
+    .project-badge-row {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .project-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 7px 10px;
+      border: 1px solid rgba(88, 166, 255, 0.28);
+      border-radius: 999px;
+      color: var(--secondary);
+      background: rgba(88, 166, 255, 0.065);
+      font-size: 0.72rem;
+      font-weight: 900;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .project-status::before {
+      content: "";
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: currentColor;
+      box-shadow: 0 0 0 4px rgba(88, 166, 255, 0.08);
+    }
+
+    .project-link-button {
+      min-height: 40px;
+      padding: 0 13px;
+      border: 1px solid var(--border);
+      border-radius: 11px;
+      background: rgba(255, 255, 255, 0.025);
+      transition: transform 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+    }
+
+    .project-link-button:hover {
+      transform: translateY(-2px);
+      border-color: rgba(37, 217, 154, 0.5);
+    }
+
+    .project-link-store {
+      color: var(--primary);
+      border-color: rgba(37, 217, 154, 0.24);
+      background: rgba(37, 217, 154, 0.055);
+    }
+
+    .project-link-app-store {
+      color: var(--secondary);
+      border-color: rgba(88, 166, 255, 0.24);
+      background: rgba(88, 166, 255, 0.055);
+    }
+
+    .packages-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 17px;
+    }
+
+    .package-card {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      min-height: 235px;
+      padding: 25px;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      background: var(--surface);
+      color: inherit;
+      text-decoration: none;
+      cursor: pointer;
+      transition:
+        transform 0.22s ease,
+        border-color 0.22s ease,
+        box-shadow 0.22s ease;
+    }
+
+    .package-card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(88, 166, 255, 0.45);
+      box-shadow: 0 18px 45px rgba(0, 0, 0, 0.16);
+    }
+
+    .package-card:focus-visible {
+      outline: 3px solid var(--primary);
+      outline-offset: 4px;
+      border-color: var(--primary);
+    }
+
+    .package-icon {
+      width: 45px;
+      aspect-ratio: 1;
+      display: grid;
+      place-items: center;
+      border-radius: 14px;
+      color: var(--secondary);
+      background: rgba(88, 166, 255, 0.1);
+      font-weight: 950;
+    }
+
+    .package-card h3 {
+      margin-top: 16px;
+      font-size: 1.03rem;
+      overflow-wrap: anywhere;
+    }
+
+    .package-card p {
+      flex: 1;
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: 0.86rem;
+    }
+
+    .package-link {
+      width: fit-content;
+      margin-top: 17px;
+      color: var(--primary);
+      font-size: 0.82rem;
+      font-weight: 850;
+      line-height: 1.45;
+      overflow-wrap: anywhere;
+    }
+
+    .package-card:hover .package-link {
+      text-decoration: underline;
+      text-underline-offset: 4px;
+    }
+
+    .publications {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+    }
+
+    .publication-card {
+      display: grid;
+      grid-template-columns: 60px 1fr;
+      gap: 18px;
+      padding: 25px;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      background: var(--surface);
+    }
+
+    .publication-year {
+      width: 60px;
+      height: 60px;
+      display: grid;
+      place-items: center;
+      border-radius: 17px;
+      color: var(--primary);
+      background: rgba(37, 217, 154, 0.09);
+      font-size: 0.87rem;
+      font-weight: 900;
+    }
+
+    .publication-card h3 {
+      font-size: 1.04rem;
+      line-height: 1.35;
+    }
+
+    .publication-card p {
+      margin-top: 7px;
+      color: var(--muted);
+      font-size: 0.87rem;
+    }
+
+    .contact-card {
+      position: relative;
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 40px;
+      padding: clamp(30px, 6vw, 65px);
+      border: 1px solid var(--border);
+      border-radius: 30px;
+      background:
+        linear-gradient(130deg, rgba(37, 217, 154, 0.13), transparent 48%),
+        linear-gradient(310deg, rgba(88, 166, 255, 0.1), transparent 45%),
+        var(--surface);
+      box-shadow: var(--shadow);
+    }
+
+    .contact-card::after {
+      content: "";
+      position: absolute;
+      width: 310px;
+      height: 310px;
+      right: -140px;
+      top: -150px;
+      border: 1px solid rgba(37, 217, 154, 0.2);
+      border-radius: 50%;
+      box-shadow: 0 0 0 55px rgba(37, 217, 154, 0.025);
+    }
+
+    .contact-copy {
+      position: relative;
+      z-index: 2;
+    }
+
+    .contact-copy h2 {
+      font-size: clamp(2.25rem, 5vw, 4.2rem);
+      line-height: 1.02;
+      letter-spacing: -0.05em;
+    }
+
+    .contact-copy p {
+      max-width: 620px;
+      margin-top: 17px;
+      color: var(--muted);
+    }
+
+    .contact-list {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      gap: 12px;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 13px;
+      padding: 15px;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.035);
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+
+    .contact-item:hover {
+      transform: translateX(5px);
+      border-color: rgba(37, 217, 154, 0.4);
+    }
+
+    .contact-icon {
+      width: 42px;
+      height: 42px;
+      flex: 0 0 42px;
+      display: grid;
+      place-items: center;
+      border-radius: 13px;
+      color: var(--primary);
+      background: rgba(37, 217, 154, 0.09);
+      font-weight: 950;
+    }
+
+    .contact-item small {
+      display: block;
+      color: var(--muted);
+      font-size: 0.72rem;
+      font-weight: 750;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+    }
+
+    .contact-item strong {
+      display: block;
+      margin-top: 2px;
+      font-size: 0.88rem;
+      overflow-wrap: anywhere;
+    }
+
+    footer {
+      padding: 25px 0 38px;
+      color: var(--muted);
+      font-size: 0.84rem;
+    }
+
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      padding-top: 25px;
+      border-top: 1px solid var(--border);
+    }
+
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      font-weight: 750;
+    }
+
+    .footer-links a:hover {
+      color: var(--primary);
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(26px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .back-to-top {
+      position: fixed;
+      right: 22px;
+      bottom: 22px;
+      z-index: 80;
+      width: 48px;
+      height: 48px;
+      display: grid;
+      place-items: center;
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      color: #04130d;
+      background: var(--primary);
+      box-shadow: 0 14px 35px rgba(37, 217, 154, 0.23);
+      cursor: pointer;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(15px);
+      transition: all 0.25s ease;
+    }
+
+    .back-to-top.show {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 980px) {
+      .nav-links {
+        position: fixed;
+        left: 20px;
+        right: 20px;
+        top: calc(var(--nav-height) + 10px);
+        display: none;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 3px;
+        padding: 14px;
+        border: 1px solid var(--border);
+        border-radius: 18px;
+        background: var(--surface-solid);
+        box-shadow: var(--shadow);
+      }
+
+      .nav-links.open {
+        display: flex;
+      }
+
+      .nav-links a {
+        padding: 12px 13px;
+        border-radius: 10px;
+      }
+
+      .nav-links a:hover,
+      .nav-links a.active {
+        background: var(--surface-light);
+      }
+
+      .nav-links a::after {
+        display: none;
+      }
+
+      .menu-button {
+        display: grid;
+      }
+
+      .hero-grid,
+      .about-grid,
+      .education-grid,
+      .experience-layout,
+      .contact-card {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        min-height: auto;
+        padding-top: calc(var(--nav-height) + 75px);
+      }
+
+      .hero-copy {
+        text-align: center;
+      }
+
+      .availability,
+      .hero-buttons,
+      .quick-links {
+        margin-inline: auto;
+        justify-content: center;
+      }
+
+      .hero-description {
+        margin-inline: auto;
+      }
+
+      .profile-wrap {
+        max-width: 390px;
+      }
+
+      .experience-summary {
+        position: static;
+      }
+
+      .skills-grid,
+      .packages-grid,
+      .training-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .contact-list {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 720px) {
+      .container {
+        width: min(calc(100% - 28px), var(--max-width));
+      }
+
+      .brand-text {
+        display: none;
+      }
+
+      .hero h1 {
+        font-size: clamp(3.2rem, 17vw, 5rem);
+      }
+
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .skills-grid,
+      .projects-grid,
+      .packages-grid,
+      .training-grid,
+      .publications,
+      .contact-list,
+      .education-meta {
+        grid-template-columns: 1fr;
+      }
+
+      .timeline-head {
+        flex-direction: column;
+      }
+
+      .publication-card {
+        grid-template-columns: 1fr;
+      }
+
+      .publication-year {
+        width: fit-content;
+        height: auto;
+        padding: 8px 11px;
+      }
+
+      .footer-inner {
+        flex-direction: column;
+        text-align: center;
+      }
+    }
+
+    @media (max-width: 470px) {
+      section {
+        padding: 82px 0;
+      }
+
+      .hero-buttons {
+        flex-direction: column;
+      }
+
+      .btn {
+        width: 100%;
+      }
+
+      .profile-meta,
+      .stats-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .stat {
+        padding: 16px;
+      }
+
+      .project-card {
+        padding: 24px;
+      }
+
+      .timeline-item {
+        grid-template-columns: 40px 1fr;
+        gap: 11px;
+      }
+
+      .timeline-dot {
+        width: 40px;
+        height: 40px;
+      }
+
+      .timeline::before {
+        left: 19px;
+      }
+
+      .education-item-head {
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .contact-card {
+        padding: 27px 20px;
+      }
+
+
+      .credential-meta div {
+        flex-direction: column;
+        gap: 4px;
+      }
+
+      .credential-meta strong {
+        text-align: left;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+
+      .reveal {
+        opacity: 1;
+        transform: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+
+  <nav class="navbar" id="navbar" aria-label="Primary navigation">
+    <div class="container nav-inner">
+      <a class="brand" href="#home" aria-label="Nafim Ahmed home">
+        <span class="brand-mark"><span>NA</span></span>
+        <span class="brand-text">Nafim Ahmed</span>
+      </a>
+
+      <ul class="nav-links" id="navLinks">
+        <li><a class="active" href="#home">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#education">Education</a></li>
+        <li><a href="#certifications">Training</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#packages">Packages</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <button
+          class="icon-button"
+          id="themeToggle"
+          type="button"
+          aria-label="Toggle light and dark mode"
+          title="Toggle theme"
+        >
+          <span id="themeIcon">☾</span>
+        </button>
+
+        <button
+          class="menu-button"
+          id="menuButton"
+          type="button"
+          aria-label="Open navigation menu"
+          aria-expanded="false"
+        >
+          <span>☰</span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <main id="main-content">
+    <section class="hero" id="home">
+      <div class="container hero-grid">
+        <div class="hero-copy reveal">
+          <div class="availability">
+            <span class="pulse" aria-hidden="true"></span>
+            Open to impactful opportunities
+          </div>
+
+          <p class="eyebrow">Hello, I’m</p>
+
+          <h1>
+            Nafim<br />
+            <span class="gradient-text">Ahmed.</span>
+          </h1>
+
+          <p class="typing-line" aria-live="polite">
+            I build
+            <span class="typed-text" id="typedText">scalable Flutter applications</span>
+            <span class="cursor">|</span>
+          </p>
+
+          <p class="hero-description">
+            Software Engineer with 5+ years of experience building mobile applications,
+            enterprise ERP solutions, AI-powered products, APIs and connected IoT systems.
+            Currently contributing to Oracle EBS–integrated mobile solutions at PRAN-RFL Group.
+          </p>
+
+          <div class="hero-buttons">
+            <a class="btn btn-primary" href="#projects">
+              Explore my work <span aria-hidden="true">↗</span>
+            </a>
+            <a
+              class="btn btn-secondary"
+              href="assets/Nafim_Ahmed_CV.pdf"
+              download="Nafim_Ahmed_CV.pdf"
+              aria-label="Download Nafim Ahmed CV as PDF"
+            >
+              Download CV <span aria-hidden="true">↓</span>
+            </a>
+            <a class="btn btn-secondary" href="mailto:recentnafimahmed@gmail.com">
+              Let’s work together
+            </a>
+          </div>
+
+          <div class="quick-links" aria-label="Social links">
+            <a href="https://github.com/NafimAhmed" target="_blank" rel="noopener noreferrer">
+              GitHub ↗
+            </a>
+            <a
+              href="https://www.linkedin.com/in/nafim-ahmed-recent/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              LinkedIn ↗
+            </a>
+            <a href="https://pub.dev/publishers/" target="_blank" rel="noopener noreferrer">
+              Pub.dev ↗
+            </a>
+          </div>
+        </div>
+
+        <div class="profile-wrap reveal">
+          <article class="profile-card">
+            <div class="profile-image">
+              <img
+                src="https://avatars.githubusercontent.com/u/49490709?v=4"
+                alt="Nafim Ahmed"
+                loading="eager"
+              />
+            </div>
+
+            <div class="profile-info">
+              <h2>Software Engineer</h2>
+              <p>Flutter • ERP • AI • IoT</p>
+
+              <div class="profile-meta">
+                <div class="meta-item">
+                  <span class="meta-label">Based in</span>
+                  <span class="meta-value">Dhaka, Bangladesh</span>
+                </div>
+                <div class="meta-item">
+                  <span class="meta-label">Experience</span>
+                  <span class="meta-value">5+ Years</span>
+                </div>
+                <div class="meta-item">
+                  <span class="meta-label">Focus</span>
+                  <span class="meta-value">Product Engineering</span>
+                </div>
+                <div class="meta-item">
+                  <span class="meta-label">Work mode</span>
+                  <span class="meta-value">Remote / On-site</span>
+                </div>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <div class="stats container reveal" aria-label="Career statistics">
+      <div class="stats-grid">
+        <div class="stat">
+          <strong>5+</strong>
+          <span>Years of experience</span>
+        </div>
+        <div class="stat">
+          <strong>80+</strong>
+          <span>GitHub repositories</span>
+        </div>
+        <div class="stat">
+          <strong>8</strong>
+          <span>Published packages</span>
+        </div>
+        <div class="stat">
+          <strong>2</strong>
+          <span>Research publications</span>
+        </div>
+      </div>
+    </div>
+
+    <section id="about">
+      <div class="container">
+        <header class="section-heading reveal">
+          <span class="section-tag">About me</span>
+          <h2>Engineering practical products that connect people, data and operations.</h2>
+          <p>
+            My work sits at the intersection of mobile engineering, enterprise systems,
+            artificial intelligence and real-world automation.
+          </p>
+        </header>
+
+        <div class="about-grid">
+          <article class="panel about-copy reveal">
+            <p>
+              I am a Software Engineer and Flutter specialist from Dhaka, Bangladesh,
+              experienced in designing production-grade mobile applications and
+              integrating them with complex backend and Oracle ERP systems.
+            </p>
+
+            <p>
+              I have worked across REST APIs, real-time communication, offline-first
+              applications, QR and barcode workflows, NFC/RFID devices, printing,
+              location services, Firebase, computer vision and intelligent chatbot systems.
+            </p>
+
+            <p>
+              Beyond application development, I build reusable Flutter packages and explore
+              AI, IoT and embedded systems to turn experimental concepts into useful,
+              maintainable products.
+            </p>
+
+            <div class="hero-buttons">
+              <a class="btn btn-primary" href="mailto:recentnafimahmed@gmail.com">
+                Contact me
+              </a>
+              <a
+                class="btn btn-secondary"
+                href="assets/Nafim_Ahmed_CV.pdf"
+                download="Nafim_Ahmed_CV.pdf"
+                aria-label="Download Nafim Ahmed CV as PDF"
+              >
+                Download CV <span aria-hidden="true">↓</span>
+              </a>
+              <a
+                class="btn btn-secondary"
+                href="https://github.com/NafimAhmed"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                View GitHub
+              </a>
+            </div>
+          </article>
+
+          <div class="panel focus-list reveal">
+            <article class="focus-item">
+              <div class="focus-icon">01</div>
+              <div>
+                <h3>Enterprise Mobile Engineering</h3>
+                <p>
+                  ERP mobile applications, Oracle EBS integrations, secure APIs,
+                  role-based workflows and offline-ready business processes.
+                </p>
+              </div>
+            </article>
+
+            <article class="focus-item">
+              <div class="focus-icon">02</div>
+              <div>
+                <h3>AI-powered Experiences</h3>
+                <p>
+                  Computer vision, intelligent chatbots, prediction systems,
+                  model integration and AI-enabled mobile products.
+                </p>
+              </div>
+            </article>
+
+            <article class="focus-item">
+              <div class="focus-icon">03</div>
+              <div>
+                <h3>IoT and Hardware Integration</h3>
+                <p>
+                  RFID, NFC, QR scanners, Arduino/ESP32 communication,
+                  real-time controllers and connected automation.
+                </p>
+              </div>
+            </article>
+
+            <article class="focus-item">
+              <div class="focus-icon">04</div>
+              <div>
+                <h3>Developer Tools and Packages</h3>
+                <p>
+                  Reusable Flutter packages, clean APIs, documentation and
+                  components designed for other developers.
+                </p>
+              </div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="education">
+      <div class="container">
+        <header class="section-heading reveal">
+          <span class="section-tag">Education</span>
+          <h2>My academic journey from secondary education to computer science.</h2>
+          <p>
+            A progressive academic path that built my analytical thinking,
+            technical foundation and professional software-engineering skills.
+          </p>
+        </header>
+
+        <div class="education-grid">
+          <article class="education-highlight reveal">
+            <div class="education-icon" aria-hidden="true">🎓</div>
+            <div>
+              <h3>Academic Journey</h3>
+              <p>SSC 2014 • HSC 2016 • BSc in CSE 2022</p>
+            </div>
+          </article>
+
+          <div class="education-list">
+            <article class="education-item reveal">
+              <div class="education-item-head">
+                <span class="education-level">Bachelor's Degree</span>
+                <span class="education-year">2022</span>
+              </div>
+              <h3>BSc in Computer Science and Engineering</h3>
+              <p class="education-institute">Daffodil International University</p>
+              <p class="education-item-note">
+                Completed the undergraduate degree with a foundation in software engineering,
+                algorithms, databases, networking, artificial intelligence and computer systems.
+              </p>
+            </article>
+
+            <article class="education-item reveal">
+              <div class="education-item-head">
+                <span class="education-level">Higher Secondary Certificate</span>
+                <span class="education-year">2016</span>
+              </div>
+              <h3>Higher Secondary Certificate (HSC)</h3>
+              <p class="education-institute">Completed in 2016</p>
+            </article>
+
+            <article class="education-item reveal">
+              <div class="education-item-head">
+                <span class="education-level">Secondary School Certificate</span>
+                <span class="education-year">2014</span>
+              </div>
+              <h3>Secondary School Certificate (SSC)</h3>
+              <p class="education-institute">Completed in 2014</p>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="certifications">
+      <div class="container">
+        <header class="section-heading reveal">
+          <span class="section-tag">Training &amp; Certifications</span>
+          <h2>Verified learning in Flutter, AI engineering, augmented reality and information security.</h2>
+          <p>
+            Professional certificates and completed courses that strengthen my work in
+            mobile engineering, artificial intelligence, immersive technology and enterprise systems.
+          </p>
+        </header>
+
+        <div class="training-grid">
+          <article class="training-card reveal">
+            <div class="training-icon" aria-hidden="true">AI</div>
+            <span class="training-type">Ostad • Certificate of Assessment</span>
+            <h3>AI Engineering Bootcamp for Programmers</h3>
+            <p>
+              Successfully completed the online live AI Engineering Bootcamp for Programmers
+              with Batch 2 and received a vetted certificate of assessment.
+            </p>
+            <div class="credential-meta">
+              <div><span>Issuer</span><strong>Ostad Ltd.</strong></div>
+              <div><span>Credential ID</span><strong>A36428</strong></div>
+              <div><span>Assessment</span><strong>Quiz 94.1% • Assignment 60%</strong></div>
+            </div>
+            <div class="training-topics">
+              <span>AI Engineering</span>
+              <span>Programming</span>
+              <span>Assessment</span>
+              <span>Batch 2</span>
+            </div>
+            <div class="training-actions">
+              <a class="training-link" href="assets/ai-engineering-bootcamp-ostad.pdf" target="_blank" rel="noopener noreferrer">
+                View certificate ↗
+              </a>
+            </div>
+          </article>
+
+          <article class="training-card reveal">
+            <div class="training-icon" aria-hidden="true">ISO</div>
+            <span class="training-type">B-ADVANCY • Awareness Training</span>
+            <h3>ISO 9001:2015 (QMS) &amp; ISO 27001:2022 (ISMS)</h3>
+            <p>
+              Completed awareness training on quality management and information security
+              management systems at Pakiza Software Ltd., Dhaka.
+            </p>
+            <div class="credential-meta">
+              <div><span>Training dates</span><strong>05 February &amp; 03 March 2024</strong></div>
+              <div><span>Issue date</span><strong>20 March 2024</strong></div>
+              <div><span>Certificate No.</span><strong>BAC-PSL/2403-07</strong></div>
+            </div>
+            <div class="training-topics">
+              <span>ISO 9001:2015</span>
+              <span>QMS</span>
+              <span>ISO 27001:2022</span>
+              <span>ISMS</span>
+            </div>
+            <div class="training-actions">
+              <a class="training-link" href="assets/iso-awareness-training-b-advancy.pdf" target="_blank" rel="noopener noreferrer">
+                View certificate ↗
+              </a>
+            </div>
+          </article>
+
+          <article class="training-card reveal">
+            <div class="training-icon" aria-hidden="true">AR</div>
+            <span class="training-type">Coursera • Google AR &amp; VR</span>
+            <h3>Introduction to Augmented Reality and ARCore</h3>
+            <p>
+              Completed an online non-credit course authorized by Google AR &amp; VR
+              and offered through Coursera.
+            </p>
+            <div class="credential-meta">
+              <div><span>Completion date</span><strong>16 October 2020</strong></div>
+              <div><span>Credential ID</span><strong>AADKWKBMV4RX</strong></div>
+              <div><span>Provider</span><strong>Google AR &amp; VR / Coursera</strong></div>
+            </div>
+            <div class="training-topics">
+              <span>Augmented Reality</span>
+              <span>ARCore</span>
+              <span>Google AR &amp; VR</span>
+              <span>Coursera</span>
+            </div>
+            <div class="training-actions">
+              <a class="training-link" href="assets/introduction-to-augmented-reality-arcore-coursera.pdf" target="_blank" rel="noopener noreferrer">
+                View certificate ↗
+              </a>
+              <a class="training-link training-link-secondary" href="https://coursera.org/verify/AADKWKBMV4RX" target="_blank" rel="noopener noreferrer">
+                Verify credential ↗
+              </a>
+            </div>
+          </article>
+
+          <article class="training-card reveal">
+            <div class="training-icon" aria-hidden="true">APP</div>
+            <span class="training-type">Udemy • Certificate of Completion</span>
+            <h3>The Complete Flutter Development Bootcamp with Dart</h3>
+            <p>
+              Completed a 29-hour Flutter and Dart development course instructed by
+              Dr. Angela Yu.
+            </p>
+            <div class="credential-meta">
+              <div><span>Completion date</span><strong>11 August 2023</strong></div>
+              <div><span>Course length</span><strong>29 total hours</strong></div>
+              <div><span>Certificate No.</span><strong>UC-8aeeb52b-cad4-4ff0-902b-7b13884eee12</strong></div>
+            </div>
+            <div class="training-topics">
+              <span>Flutter</span>
+              <span>Dart</span>
+              <span>Mobile Development</span>
+              <span>Udemy</span>
+            </div>
+            <div class="training-actions">
+              <a class="training-link" href="assets/complete-flutter-development-bootcamp-udemy.pdf" target="_blank" rel="noopener noreferrer">
+                View certificate ↗
+              </a>
+              <a class="training-link training-link-secondary" href="https://ude.my/UC-8aeeb52b-cad4-4ff0-902b-7b13884eee12" target="_blank" rel="noopener noreferrer">
+                Verify credential ↗
+              </a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="skills">
+      <div class="container">
+        <header class="section-heading reveal">
+          <span class="section-tag">Core expertise</span>
+          <h2>A multidisciplinary toolkit for building complete digital products.</h2>
+        </header>
+
+        <div class="skills-grid">
+          <article class="skill-card reveal">
+            <span class="skill-card-number">01 / MOBILE</span>
+            <h3>Mobile Development</h3>
+            <div class="chips">
+              <span class="chip">Flutter</span>
+              <span class="chip">Dart</span>
+              <span class="chip">Android Native</span>
+              <span class="chip">Kotlin</span>
+              <span class="chip">Java</span>
+              <span class="chip">Swift</span>
+              <span class="chip">React Native</span>
+            </div>
+          </article>
+
+          <article class="skill-card reveal">
+            <span class="skill-card-number">02 / ARCHITECTURE</span>
+            <h3>Application Architecture</h3>
+            <div class="chips">
+              <span class="chip">BLoC / Cubit</span>
+              <span class="chip">Clean Architecture</span>
+              <span class="chip">MVVM</span>
+              <span class="chip">GetX</span>
+              <span class="chip">Dependency Injection</span>
+              <span class="chip">Offline First</span>
+            </div>
+          </article>
+
+          <article class="skill-card reveal">
+            <span class="skill-card-number">03 / BACKEND</span>
+            <h3>Backend and APIs</h3>
+            <div class="chips">
+              <span class="chip">REST API</span>
+              <span class="chip">FastAPI</span>
+              <span class="chip">Flask</span>
+              <span class="chip">Python</span>
+              <span class="chip">Go</span>
+              <span class="chip">Socket.IO</span>
+              <span class="chip">WebSocket</span>
+            </div>
+          </article>
+
+          <article class="skill-card reveal">
+            <span class="skill-card-number">04 / ERP</span>
+            <h3>Enterprise and Data</h3>
+            <div class="chips">
+              <span class="chip">Oracle EBS</span>
+              <span class="chip">Oracle ORDS</span>
+              <span class="chip">PL/SQL</span>
+              <span class="chip">Firebase</span>
+              <span class="chip">MongoDB</span>
+              <span class="chip">Hive</span>
+              <span class="chip">SQL</span>
+            </div>
+          </article>
+
+          <article class="skill-card reveal">
+            <span class="skill-card-number">05 / AI</span>
+            <h3>AI and Computer Vision</h3>
+            <div class="chips">
+              <span class="chip">TensorFlow</span>
+              <span class="chip">TFLite</span>
+              <span class="chip">OpenCV</span>
+              <span class="chip">Scikit-learn</span>
+              <span class="chip">ML Kit</span>
+              <span class="chip">Chatbots</span>
+              <span class="chip">Model Deployment</span>
+            </div>
+          </article>
+
+          <article class="skill-card reveal">
+            <span class="skill-card-number">06 / HARDWARE</span>
+            <h3>IoT and Device Integration</h3>
+            <div class="chips">
+              <span class="chip">ESP32</span>
+              <span class="chip">MicroPython</span>
+              <span class="chip">Arduino</span>
+              <span class="chip">RFID</span>
+              <span class="chip">NFC</span>
+              <span class="chip">QR / Barcode</span>
+              <span class="chip">Thermal Printing</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="experience">
+      <div class="container">
+        <header class="section-heading reveal">
+          <span class="section-tag">Experience</span>
+          <h2>Building software around real operational challenges.</h2>
+        </header>
+
+        <div class="experience-layout">
+          <aside class="panel experience-summary reveal">
+            <strong>5+</strong>
+            <h3>Years in software and mobile product development</h3>
+            <p>
+              Experienced across enterprise applications, commercial mobile products,
+              AI solutions, reusable SDKs and hardware-integrated systems.
+            </p>
+          </aside>
+
+          <div class="timeline">
+            <article class="timeline-item reveal">
+              <div class="timeline-dot">NOW</div>
+              <div class="timeline-card">
+                <div class="timeline-head">
+                  <div>
+                    <h3>Software Engineer / Flutter Developer</h3>
+                    <div class="timeline-company">PRAN-RFL Group</div>
+                  </div>
+                  <span class="timeline-badge">Enterprise</span>
+                </div>
+                <p>
+                  Developing Express ERP and other mobile solutions integrated with
+                  Oracle EBS and ORDS. Working on inventory, production, quality,
+                  market operations, display room, QR workflows, printing and
+                  role-based enterprise modules.
+                </p>
+              </div>
+            </article>
+
+            <article class="timeline-item reveal">
+              <div class="timeline-dot">AI</div>
+              <div class="timeline-card">
+                <div class="timeline-head">
+                  <div>
+                    <h3>AI Application and Chatbot Development</h3>
+                    <div class="timeline-company">Product and R&amp;D Work</div>
+                  </div>
+                  <span class="timeline-badge">Innovation</span>
+                </div>
+                <p>
+                  Building intelligent chatbots, computer-vision prototypes,
+                  classification systems, interview agents and AI-powered mobile
+                  features using Python, TensorFlow, OpenCV and Flutter.
+                </p>
+              </div>
+            </article>
+
+            <article class="timeline-item reveal">
+              <div class="timeline-dot">APP</div>
+              <div class="timeline-card">
+                <div class="timeline-head">
+                  <div>
+                    <h3>Commercial Mobile Application Development</h3>
+                    <div class="timeline-company">Cross-platform Products</div>
+                  </div>
+                  <span class="timeline-badge">Mobile</span>
+                </div>
+                <p>
+                  Delivered ERP, ride-sharing, e-commerce, payment, travel and
+                  utility applications with authentication, maps, tracking,
+                  API integrations, push notifications and store deployment.
+                </p>
+              </div>
+            </article>
+
+            <article class="timeline-item reveal">
+              <div class="timeline-dot">OSS</div>
+              <div class="timeline-card">
+                <div class="timeline-head">
+                  <div>
+                    <h3>Open-source Flutter Package Author</h3>
+                    <div class="timeline-company">Pub.dev Ecosystem</div>
+                  </div>
+                  <span class="timeline-badge">Open Source</span>
+                </div>
+                <p>
+                  Creating reusable packages for PDF reading, offline REST sync,
+                  image classification, calendars, augmented reality and
+                  responsive UI development.
+                </p>
+              </div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects">
+      <div class="container">
+        <header class="section-heading reveal">
+          <span class="section-tag">Remarkable projects</span>
+          <h2>Production applications and engineering projects with real-world impact.</h2>
+          <p>
+            A focused selection of my enterprise, commercial mobile, artificial-intelligence,
+            machine-learning and real-time communication projects.
+          </p>
+        </header>
+
+        <div class="projects-grid">
+          <article class="project-card reveal">
+            <div class="project-top">
+              <div class="project-badge-row">
+                <span class="project-type">Enterprise ERP</span>
+                <span class="project-status">Published on Google Play</span>
+              </div>
+              <h3>ExpressERP</h3>
+              <p>
+                An enterprise mobile ERP application for PRAN-RFL Group that connects
+                Oracle EBS and ORDS workflows across production, inventory, quality,
+                sample collection, market operations, QR processing and business reporting.
+              </p>
+              <div class="project-tech">
+                <span>Flutter</span><span>•</span><span>BLoC / Cubit</span><span>•</span>
+                <span>Oracle EBS</span><span>•</span><span>Oracle ORDS</span><span>•</span>
+                <span>PL/SQL</span>
+              </div>
+            </div>
+            <div class="project-bottom project-links">
+              <a
+                class="project-link project-link-button"
+                href="https://github.com/NafimAhmed/pran-erp"
+                target="_blank"
+                rel="noopener noreferrer"
+              >GitHub ↗</a>
+              <a
+                class="project-link project-link-button project-link-store"
+                href="https://play.google.com/store/apps/details?id=com.pranrfl.express_erp&amp;pcampaignid=web_share"
+                target="_blank"
+                rel="noopener noreferrer"
+              >Google Play ↗</a>
+            </div>
+          </article>
+
+          <article class="project-card reveal">
+            <div class="project-top">
+              <div class="project-badge-row">
+                <span class="project-type">Cross-platform ERP</span>
+                <span class="project-status">Android &amp; iOS</span>
+              </div>
+              <h3>Cripton Pro</h3>
+              <p>
+                A cross-platform ERP mobile application designed to simplify business
+                operations, provide secure access to organizational data and support
+                structured workflow management on Android and iOS.
+              </p>
+              <div class="project-tech">
+                <span>Flutter</span><span>•</span><span>Dart</span><span>•</span>
+                <span>REST API</span><span>•</span><span>ERP</span><span>•</span>
+                <span>Store Deployment</span>
+              </div>
+            </div>
+            <div class="project-bottom project-links">
+              <a
+                class="project-link project-link-button"
+                href="https://github.com/NafimAhmed/cripton-erp"
+                target="_blank"
+                rel="noopener noreferrer"
+              >GitHub ↗</a>
+              <a
+                class="project-link project-link-button project-link-store"
+                href="https://play.google.com/store/apps/details?id=com.worknestor.criptonpro&amp;pcampaignid=web_share"
+                target="_blank"
+                rel="noopener noreferrer"
+              >Google Play ↗</a>
+              <a
+                class="project-link project-link-button project-link-app-store"
+                href="https://apps.apple.com/us/app/cripton-erp/id6478108512"
+                target="_blank"
+                rel="noopener noreferrer"
+              >App Store ↗</a>
+            </div>
+          </article>
+
+          <article class="project-card reveal">
+            <div class="project-top">
+              <div class="project-badge-row">
+                <span class="project-type">E-commerce</span>
+                <span class="project-status">Published on iOS</span>
+              </div>
+              <h3>Enorsia</h3>
+              <p>
+                A European e-commerce mobile application with product discovery,
+                account management, API-driven catalog content and a scalable Flutter
+                architecture designed for a smooth shopping experience.
+              </p>
+              <div class="project-tech">
+                <span>Flutter</span><span>•</span><span>E-commerce</span><span>•</span>
+                <span>REST API</span><span>•</span><span>iOS Deployment</span>
+              </div>
+            </div>
+            <div class="project-bottom project-links">
+              <a
+                class="project-link project-link-button"
+                href="https://github.com/NafimAhmed/enorsia-e-commerce"
+                target="_blank"
+                rel="noopener noreferrer"
+              >GitHub ↗</a>
+              <a
+                class="project-link project-link-button project-link-app-store"
+                href="https://apps.apple.com/cn/app/enorsia/id6470290654"
+                target="_blank"
+                rel="noopener noreferrer"
+              >App Store ↗</a>
+            </div>
+          </article>
+
+          <article class="project-card reveal">
+            <div class="project-top">
+              <div class="project-badge-row">
+                <span class="project-type">AI Automation</span>
+                <span class="project-status">AI Project</span>
+              </div>
+              <h3>AI Interview Agent for Google Meet</h3>
+              <p>
+                An AI-assisted interview-agent project created around Google Meet to
+                explore automated interview workflows, intelligent question handling
+                and structured candidate-interaction experiences.
+              </p>
+              <div class="project-tech">
+                <span>Artificial Intelligence</span><span>•</span><span>Python</span><span>•</span>
+                <span>Automation</span><span>•</span><span>Google Meet</span>
+              </div>
+            </div>
+            <div class="project-bottom project-links">
+              <a
+                class="project-link project-link-button"
+                href="https://github.com/NafimAhmed/google-meet-interview-agent"
+                target="_blank"
+                rel="noopener noreferrer"
+              >View GitHub ↗</a>
+            </div>
+          </article>
+
+          <article class="project-card reveal">
+            <div class="project-top">
+              <div class="project-badge-row">
+                <span class="project-type">AI + Oracle EBS</span>
+                <span class="project-status">Forecasting Project</span>
+              </div>
+              <h3>Product Demand Forecasting for Oracle EBS</h3>
+              <p>
+                A machine-learning project that connects enterprise product data with
+                a demand-forecasting workflow to explore how predictive analytics can
+                support inventory and planning decisions around Oracle EBS.
+              </p>
+              <div class="project-tech">
+                <span>Python</span><span>•</span><span>Machine Learning</span><span>•</span>
+                <span>Forecasting</span><span>•</span><span>Oracle EBS</span><span>•</span>
+                <span>Data Analysis</span>
+              </div>
+            </div>
+            <div class="project-bottom project-links">
+              <a
+                class="project-link project-link-button"
+                href="https://github.com/NafimAhmed/oracle-ebs-connection-product-demand-forecasting"
+                target="_blank"
+                rel="noopener noreferrer"
+              >View GitHub ↗</a>
+            </div>
+          </article>
+
+          <article class="project-card reveal">
+            <div class="project-top">
+              <div class="project-badge-row">
+                <span class="project-type">Real-time Communication</span>
+                <span class="project-status">Backend Project</span>
+              </div>
+              <h3>Telegram Messaging Automation Platform</h3>
+              <p>
+                A Telegram-based messaging and automation project focused on bot
+                integration, programmatic communication and a backend foundation for
+                connecting Telegram workflows with client applications.
+              </p>
+              <div class="project-tech">
+                <span>Python</span><span>•</span><span>Telegram API</span><span>•</span>
+                <span>Bot Automation</span><span>•</span><span>Backend</span>
+              </div>
+            </div>
+            <div class="project-bottom project-links">
+              <a
+                class="project-link project-link-button"
+                href="https://github.com/NafimAhmed/telegram-bot2"
+                target="_blank"
+                rel="noopener noreferrer"
+              >View GitHub ↗</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="packages">
+      <div class="container">
+        <header class="section-heading reveal">
+          <span class="section-tag">Open source</span>
+          <h2>Flutter packages created for practical developer needs.</h2>
+          <p>
+            Click any package card to open its official pub.dev page directly.
+          </p>
+        </header>
+
+        <div class="packages-grid">
+          <a
+            class="package-card reveal"
+            href="https://pub.dev/packages/ai_pdf_reader"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Open ai_pdf_reader on pub.dev"
+          >
+            <div class="package-icon">PDF</div>
+            <h3>ai_pdf_reader</h3>
+            <p>
+              PDF text extraction, text-to-speech, highlighting, reading position
+              and controller-based document reading.
+            </p>
+            <span class="package-link">pub.dev/packages/ai_pdf_reader ↗</span>
+          </a>
+
+          <a
+            class="package-card reveal"
+            href="https://pub.dev/packages/easy_rest_sync"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Open easy_rest_sync on pub.dev"
+          >
+            <div class="package-icon">SYNC</div>
+            <h3>easy_rest_sync</h3>
+            <p>
+              Offline-first REST synchronization for Flutter with local persistence,
+              streaming and conflict-ready application workflows.
+            </p>
+            <span class="package-link">pub.dev/packages/easy_rest_sync ↗</span>
+          </a>
+
+          <a
+            class="package-card reveal"
+            href="https://pub.dev/packages/flutter_tflite_image_classification_engine"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Open flutter_tflite_image_classification_engine on pub.dev"
+          >
+            <div class="package-icon">AI</div>
+            <h3>flutter_tflite_image_classification_engine</h3>
+            <p>
+              Flexible TFLite image and frame classification engine with configurable
+              preprocessing and real-time stream support.
+            </p>
+            <span class="package-link">pub.dev/packages/flutter_tflite_image_classification_engine ↗</span>
+          </a>
+
+          <a
+            class="package-card reveal"
+            href="https://pub.dev/packages/mediapipeline_flutter"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Open mediapipeline_flutter on pub.dev"
+          >
+            <div class="package-icon">MP</div>
+            <h3>mediapipeline_flutter</h3>
+            <p>
+              MediaPipe-powered Flutter vision pipelines with native Android hand
+              landmark detection and basic gesture recognition.
+            </p>
+            <span class="package-link">pub.dev/packages/mediapipeline_flutter ↗</span>
+          </a>
+
+          <a
+            class="package-card reveal"
+            href="https://pub.dev/packages/firebase_notification_helper"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Open firebase_notification_helper on pub.dev"
+          >
+            <div class="package-icon">FCM</div>
+            <h3>firebase_notification_helper</h3>
+            <p>
+              Helper utilities for Firebase Messaging, local notifications, tokens,
+              topics and trusted-server push notification workflows.
+            </p>
+            <span class="package-link">pub.dev/packages/firebase_notification_helper ↗</span>
+          </a>
+
+          <a
+            class="package-card reveal"
+            href="https://pub.dev/packages/linear_calender"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Open linear_calender on pub.dev"
+          >
+            <div class="package-icon">CAL</div>
+            <h3>linear_calender</h3>
+            <p>
+              Customizable linear calendar widget with flexible dates, selection,
+              sizing, borders, styles and behavior.
+            </p>
+            <span class="package-link">pub.dev/packages/linear_calender ↗</span>
+          </a>
+
+          <a
+            class="package-card reveal"
+            href="https://pub.dev/packages/ar_tryon_view"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Open ar_tryon_view on pub.dev"
+          >
+            <div class="package-icon">AR</div>
+            <h3>ar_tryon_view</h3>
+            <p>
+              Augmented-reality try-on component designed for interactive camera,
+              face-mask, glasses and transparent overlay experiences.
+            </p>
+            <span class="package-link">pub.dev/packages/ar_tryon_view ↗</span>
+          </a>
+
+          <a
+            class="package-card reveal"
+            href="https://pub.dev/packages/absolute_sizer"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Open absolute_sizer on pub.dev"
+          >
+            <div class="package-icon">UI</div>
+            <h3>absolute_sizer</h3>
+            <p>
+              Responsive sizing utility for building consistent Flutter interfaces
+              across different screen dimensions.
+            </p>
+            <span class="package-link">pub.dev/packages/absolute_sizer ↗</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section id="publications">
+      <div class="container">
+        <header class="section-heading reveal">
+          <span class="section-tag">Research</span>
+          <h2>Published work in intelligent systems and computing.</h2>
+        </header>
+
+        <div class="publications">
+          <article class="publication-card reveal">
+            <div class="publication-year">2022</div>
+            <div>
+              <h3>Traffic Flow Forecasting in Intelligent Transportation Systems</h3>
+              <p>
+                IEEE publication focused on data-driven traffic analysis and
+                forecasting within intelligent transportation environments.
+              </p>
+            </div>
+          </article>
+
+          <article class="publication-card reveal">
+            <div class="publication-year">2023</div>
+            <div>
+              <h3>Bucket Filling Algorithm</h3>
+              <p>
+                Research publication in Asian Social Science Research presenting
+                an algorithmic approach to structured bucket-filling problems.
+              </p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="container">
+        <div class="contact-card reveal">
+          <div class="contact-copy">
+            <span class="section-tag">Contact</span>
+            <h2>Let’s build something meaningful.</h2>
+            <p>
+              I’m interested in challenging software engineering roles,
+              enterprise mobile products, AI-powered applications and innovative
+              IoT or automation projects.
+            </p>
+
+            <div class="hero-buttons">
+              <a class="btn btn-primary" href="mailto:recentnafimahmed@gmail.com">
+                Send an email
+              </a>
+              <a
+                class="btn btn-secondary"
+                href="assets/Nafim_Ahmed_CV.pdf"
+                download="Nafim_Ahmed_CV.pdf"
+                aria-label="Download Nafim Ahmed CV as PDF"
+              >
+                Download CV <span aria-hidden="true">↓</span>
+              </a>
+              <a
+                class="btn btn-secondary"
+                href="https://www.linkedin.com/in/nafim-ahmed-recent/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Connect on LinkedIn
+              </a>
+            </div>
+          </div>
+
+          <div class="contact-list">
+            <a class="contact-item" href="mailto:recentnafimahmed@gmail.com">
+              <span class="contact-icon">@</span>
+              <span>
+                <small>Email</small>
+                <strong>recentnafimahmed@gmail.com</strong>
+              </span>
+            </a>
+
+            <a
+              class="contact-item"
+              href="https://wa.me/8801797609439"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Chat with Nafim Ahmed on WhatsApp at +880 1797-609439"
+            >
+              <span class="contact-icon">WA</span>
+              <span>
+                <small>Cell and WhatsApp</small>
+                <strong>+880 1797-609439</strong>
+              </span>
+            </a>
+
+            <a
+              class="contact-item"
+              href="https://github.com/NafimAhmed"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <span class="contact-icon">GH</span>
+              <span>
+                <small>GitHub</small>
+                <strong>github.com/NafimAhmed</strong>
+              </span>
+            </a>
+
+            <a
+              class="contact-item"
+              href="https://www.linkedin.com/in/nafim-ahmed-recent/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <span class="contact-icon">in</span>
+              <span>
+                <small>LinkedIn</small>
+                <strong>nafim-ahmed-recent</strong>
+              </span>
+            </a>
+
+            <div class="contact-item">
+              <span class="contact-icon">⌖</span>
+              <span>
+                <small>Location</small>
+                <strong>Dhaka, Bangladesh</strong>
+              </span>
+            </div>
+
+            <a
+              class="contact-item"
+              href="https://github.com/NafimAhmed?tab=repositories"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <span class="contact-icon">&lt;/&gt;</span>
+              <span>
+                <small>Code portfolio</small>
+                <strong>Explore repositories</strong>
+              </span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <p>© <span id="year"></span> Nafim Ahmed. Designed and built with care.</p>
+      <div class="footer-links">
+        <a href="#home">Back to home</a>
+        <a href="mailto:recentnafimahmed@gmail.com">Email</a>
+        <a href="assets/Nafim_Ahmed_CV.pdf" download="Nafim_Ahmed_CV.pdf">Download CV</a>
+        <a href="https://github.com/NafimAhmed" target="_blank" rel="noopener noreferrer">GitHub</a>
+        <a
+          href="https://www.linkedin.com/in/nafim-ahmed-recent/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >LinkedIn</a>
+      </div>
+    </div>
+  </footer>
+
+  <button class="back-to-top" id="backToTop" type="button" aria-label="Back to top">
+    ↑
+  </button>
+
+  <script>
+    const body = document.body;
+    const navbar = document.getElementById("navbar");
+    const navLinks = document.getElementById("navLinks");
+    const menuButton = document.getElementById("menuButton");
+    const themeToggle = document.getElementById("themeToggle");
+    const themeIcon = document.getElementById("themeIcon");
+    const backToTop = document.getElementById("backToTop");
+    const typedText = document.getElementById("typedText");
+
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    const savedTheme = localStorage.getItem("portfolio-theme");
+    if (savedTheme === "light") {
+      body.classList.add("light");
+      themeIcon.textContent = "☀";
+    }
+
+    themeToggle.addEventListener("click", () => {
+      body.classList.toggle("light");
+      const isLight = body.classList.contains("light");
+      themeIcon.textContent = isLight ? "☀" : "☾";
+      localStorage.setItem("portfolio-theme", isLight ? "light" : "dark");
+    });
+
+    menuButton.addEventListener("click", () => {
+      const isOpen = navLinks.classList.toggle("open");
+      menuButton.setAttribute("aria-expanded", String(isOpen));
+      menuButton.querySelector("span").textContent = isOpen ? "✕" : "☰";
+    });
+
+    document.querySelectorAll(".nav-links a").forEach((link) => {
+      link.addEventListener("click", () => {
+        navLinks.classList.remove("open");
+        menuButton.setAttribute("aria-expanded", "false");
+        menuButton.querySelector("span").textContent = "☰";
+      });
+    });
+
+    const phrases = [
+      "scalable Flutter applications",
+      "enterprise ERP mobile solutions",
+      "AI-powered product experiences",
+      "connected IoT and automation systems",
+      "developer-friendly Flutter packages"
+    ];
+
+    let phraseIndex = 0;
+    let characterIndex = phrases[0].length;
+    let deleting = true;
+
+    function typeLoop() {
+      const phrase = phrases[phraseIndex];
+
+      if (deleting) {
+        characterIndex--;
+        typedText.textContent = phrase.slice(0, characterIndex);
+
+        if (characterIndex === 0) {
+          deleting = false;
+          phraseIndex = (phraseIndex + 1) % phrases.length;
+          setTimeout(typeLoop, 420);
+          return;
+        }
+      } else {
+        characterIndex++;
+        typedText.textContent = phrases[phraseIndex].slice(0, characterIndex);
+
+        if (characterIndex === phrases[phraseIndex].length) {
+          deleting = true;
+          setTimeout(typeLoop, 1800);
+          return;
+        }
+      }
+
+      setTimeout(typeLoop, deleting ? 38 : 58);
+    }
+
+    setTimeout(typeLoop, 1500);
+
+    const revealObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+            revealObserver.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.12 }
+    );
+
+    document.querySelectorAll(".reveal").forEach((element) => {
+      revealObserver.observe(element);
+    });
+
+    const sections = [...document.querySelectorAll("main section[id]")];
+    const navAnchors = [...document.querySelectorAll(".nav-links a")];
+
+    function updateNavigation() {
+      navbar.classList.toggle("scrolled", window.scrollY > 10);
+      backToTop.classList.toggle("show", window.scrollY > 650);
+
+      const scrollPosition = window.scrollY + 140;
+      let currentSection = "home";
+
+      sections.forEach((section) => {
+        if (scrollPosition >= section.offsetTop) {
+          currentSection = section.id;
+        }
+      });
+
+      navAnchors.forEach((anchor) => {
+        anchor.classList.toggle(
+          "active",
+          anchor.getAttribute("href") === `#${currentSection}`
+        );
+      });
+    }
+
+    window.addEventListener("scroll", updateNavigation, { passive: true });
+    updateNavigation();
+
+    backToTop.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+
+    document.addEventListener("click", (event) => {
+      const clickedInsideMenu =
+        navLinks.contains(event.target) || menuButton.contains(event.target);
+
+      if (!clickedInsideMenu && navLinks.classList.contains("open")) {
+        navLinks.classList.remove("open");
+        menuButton.setAttribute("aria-expanded", "false");
+        menuButton.querySelector("span").textContent = "☰";
+      }
+    });
+  </script>
+</body>
 </html>
+
