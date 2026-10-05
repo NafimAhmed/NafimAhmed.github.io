@@ -743,8 +743,8 @@ class _HeroSection extends StatelessWidget {
     final desktop = viewportWidth > 980;
     final mobile = viewportWidth <= 720;
     final heroNameSize = desktop
-        ? (viewportWidth * .082).clamp(54.0, 113.0)
-        : (viewportWidth * .17).clamp(51.0, 80.0);
+        ? (viewportWidth * .082).clamp(54.0, 113.0).toDouble()
+        : (viewportWidth * .17).clamp(51.0, 80.0).toDouble();
 
     final copy = Column(
       crossAxisAlignment:
@@ -858,7 +858,7 @@ class _HeroSection extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Expanded(flex: 13, child: copy),
-                  SizedBox(width: (viewportWidth * .08).clamp(40, 100)),
+                  SizedBox(width: (viewportWidth * .08).clamp(40.0, 100.0).toDouble()),
                   Expanded(flex: 7, child: profile),
                 ],
               )
@@ -1028,7 +1028,7 @@ class _TypingLineState extends State<_TypingLine> {
       _cursorVisible = !_cursorVisible;
 
       if (_deleting) {
-        _characterIndex = (_characterIndex - 1).clamp(0, phrase.length);
+        _characterIndex = (_characterIndex - 1).clamp(0, phrase.length).toInt();
         if (_characterIndex == 0) {
           _deleting = false;
           _phraseIndex = (_phraseIndex + 1) % typingPhrases.length;
@@ -1039,7 +1039,7 @@ class _TypingLineState extends State<_TypingLine> {
       } else {
         final newPhrase = typingPhrases[_phraseIndex];
         _characterIndex =
-            (_characterIndex + 1).clamp(0, newPhrase.length);
+            (_characterIndex + 1).clamp(0, newPhrase.length).toInt();
         if (_characterIndex == newPhrase.length) {
           _deleting = true;
           nextDelay = const Duration(milliseconds: 1800);
@@ -1061,7 +1061,7 @@ class _TypingLineState extends State<_TypingLine> {
   @override
   Widget build(BuildContext context) {
     final phrase = typingPhrases[_phraseIndex];
-    final visibleLength = _characterIndex.clamp(0, phrase.length);
+    final visibleLength = _characterIndex.clamp(0, phrase.length).toInt();
 
     return DefaultTextStyle(
       style: TextStyle(
@@ -3151,7 +3151,7 @@ class _SectionHeading extends StatelessWidget {
           Builder(
             builder: (context) {
               final width = MediaQuery.sizeOf(context).width;
-              final size = (width * .05).clamp(34.0, 60.0);
+              final size = (width * .05).clamp(34.0, 60.0).toDouble();
               return Text(
                 title,
                 style: TextStyle(
