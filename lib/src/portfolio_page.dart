@@ -2455,7 +2455,6 @@ class _ProjectCard extends StatelessWidget {
                 ],
               ],
             ),
-            const Spacer(),
             const SizedBox(height: 27),
             Wrap(
               spacing: 10,
@@ -2559,7 +2558,6 @@ class _PackagesSection extends StatelessWidget {
                           height: 1.55,
                         ),
                       ),
-                      const Spacer(),
                       const SizedBox(height: 17),
                       Text(
                         pkg.url.replaceFirst('https://', '') + ' ↗',
