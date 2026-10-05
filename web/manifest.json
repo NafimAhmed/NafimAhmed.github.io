@@ -1,0 +1,11 @@
+{
+  "name": "Nafim Ahmed | Software Engineer",
+  "short_name": "Nafim Ahmed",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#07111f",
+  "theme_color": "#07111f",
+  "description": "Flutter, ERP, AI and IoT engineering portfolio of Nafim Ahmed.",
+  "orientation": "portrait-primary",
+  "prefer_related_applications": false
+}
