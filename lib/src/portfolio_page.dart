@@ -2560,7 +2560,7 @@ class _PackagesSection extends StatelessWidget {
                       ),
                       const SizedBox(height: 17),
                       Text(
-                        "\${pkg.url.replaceFirst('https://', '')} ↗",
+                        "${pkg.url.replaceFirst('https://', '')} ↗",
                         style: const TextStyle(
                           color: PortfolioColors.primary,
                           fontSize: 12.5,
