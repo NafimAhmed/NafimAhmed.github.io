@@ -1291,7 +1291,7 @@ class _StatsSection extends StatelessWidget {
             children: const [
               ('5+', 'Years of experience'),
               ('80+', 'GitHub repositories'),
-              ('8', 'Published packages'),
+              ('12', 'Published packages'),
               ('2', 'Research publications'),
             ]
                 .map(
