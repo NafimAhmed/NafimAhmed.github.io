@@ -320,7 +320,7 @@ class _Background extends StatelessWidget {
             top: -120,
             child: _GlowCircle(
               size: 560,
-              color: PortfolioColors.primary.withOpacity(.12),
+              color: PortfolioColors.primary.withValues(alpha: .12),
             ),
           ),
           Positioned(
@@ -328,7 +328,7 @@ class _Background extends StatelessWidget {
             top: -170,
             child: _GlowCircle(
               size: 600,
-              color: PortfolioColors.secondary.withOpacity(.13),
+              color: PortfolioColors.secondary.withValues(alpha: .13),
             ),
           ),
         ],
@@ -353,7 +353,7 @@ class _GlowCircle extends StatelessWidget {
           decoration: BoxDecoration(
             shape: BoxShape.circle,
             gradient: RadialGradient(
-              colors: [color, color.withOpacity(0)],
+              colors: [color, color.withValues(alpha: 0)],
             ),
           ),
         ),
@@ -455,7 +455,7 @@ class _NavigationBar extends StatelessWidget {
                                 boxShadow: [
                                   BoxShadow(
                                     color: PortfolioColors.primary
-                                        .withOpacity(.25),
+                                        .withValues(alpha: .25),
                                     blurRadius: 30,
                                     offset: const Offset(0, 10),
                                   ),
@@ -711,7 +711,7 @@ class _SquareIconButtonState extends State<_SquareIconButton> {
               color: widget.palette.surface,
               border: Border.all(
                 color: _hovered
-                    ? PortfolioColors.primary.withOpacity(.55)
+                    ? PortfolioColors.primary.withValues(alpha: .55)
                     : widget.palette.border,
               ),
               borderRadius: BorderRadius.circular(13),
@@ -904,9 +904,9 @@ class _AvailabilityPillState extends State<_AvailabilityPill>
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 13, vertical: 8),
       decoration: BoxDecoration(
-        color: PortfolioColors.primary.withOpacity(.07),
+        color: PortfolioColors.primary.withValues(alpha: .07),
         border: Border.all(
-          color: PortfolioColors.primary.withOpacity(.28),
+          color: PortfolioColors.primary.withValues(alpha: .28),
         ),
         borderRadius: BorderRadius.circular(999),
       ),
@@ -924,7 +924,7 @@ class _AvailabilityPillState extends State<_AvailabilityPill>
                   color: PortfolioColors.primary,
                   boxShadow: [
                     BoxShadow(
-                      color: PortfolioColors.primary.withOpacity(
+                      color: PortfolioColors.primary.withValues(alpha: 
                         .55 * (1 - _controller.value),
                       ),
                       spreadRadius: 9 * _controller.value,
@@ -1106,7 +1106,7 @@ class _ProfileCard extends StatelessWidget {
               margin: const EdgeInsets.all(18),
               decoration: BoxDecoration(
                 border: Border.all(
-                  color: PortfolioColors.primary.withOpacity(.24),
+                  color: PortfolioColors.primary.withValues(alpha: .24),
                 ),
                 borderRadius: BorderRadius.circular(34),
               ),
@@ -1225,7 +1225,7 @@ class _MetaTile extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
-        color: Colors.white.withOpacity(.025),
+        color: Colors.white.withValues(alpha: .025),
         border: Border.all(color: palette.border),
         borderRadius: BorderRadius.circular(14),
       ),
@@ -1325,7 +1325,7 @@ class _StatCard extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
-        color: Colors.white.withOpacity(.025),
+        color: Colors.white.withValues(alpha: .025),
         borderRadius: BorderRadius.circular(17),
       ),
       child: Column(
@@ -1513,7 +1513,7 @@ class _FocusItem extends StatelessWidget {
         child: Container(
           padding: const EdgeInsets.all(18),
           decoration: BoxDecoration(
-            color: Colors.white.withOpacity(.025),
+            color: Colors.white.withValues(alpha: .025),
             border: Border.all(color: palette.border),
             borderRadius: BorderRadius.circular(17),
           ),
@@ -1525,7 +1525,7 @@ class _FocusItem extends StatelessWidget {
                 height: 48,
                 alignment: Alignment.center,
                 decoration: BoxDecoration(
-                  color: PortfolioColors.primary.withOpacity(.09),
+                  color: PortfolioColors.primary.withValues(alpha: .09),
                   borderRadius: BorderRadius.circular(14),
                 ),
                 child: Text(
@@ -1591,13 +1591,13 @@ class _EducationSection extends StatelessWidget {
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
           colors: [
-            PortfolioColors.primary.withOpacity(.14),
+            PortfolioColors.primary.withValues(alpha: .14),
             palette.surface,
           ],
           stops: const [0, .62],
         ),
         border: Border.all(
-          color: PortfolioColors.primary.withOpacity(.28),
+          color: PortfolioColors.primary.withValues(alpha: .28),
         ),
         borderRadius: BorderRadius.circular(22),
         boxShadow: palette.shadow,
@@ -1620,7 +1620,7 @@ class _EducationSection extends StatelessWidget {
               borderRadius: BorderRadius.circular(18),
               boxShadow: [
                 BoxShadow(
-                  color: PortfolioColors.primary.withOpacity(.2),
+                  color: PortfolioColors.primary.withValues(alpha: .2),
                   blurRadius: 30,
                   offset: const Offset(0, 13),
                 ),
@@ -1876,7 +1876,7 @@ class _TrainingCard extends StatelessWidget {
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
             colors: [
-              PortfolioColors.secondary.withOpacity(.055),
+              PortfolioColors.secondary.withValues(alpha: .055),
               palette.surface,
             ],
             stops: const [0, .58],
@@ -1892,7 +1892,7 @@ class _TrainingCard extends StatelessWidget {
               height: 50,
               alignment: Alignment.center,
               decoration: BoxDecoration(
-                color: PortfolioColors.secondary.withOpacity(.1),
+                color: PortfolioColors.secondary.withValues(alpha: .1),
                 borderRadius: BorderRadius.circular(15),
               ),
               child: Text(
@@ -2206,7 +2206,7 @@ class _Timeline extends StatelessWidget {
                 end: Alignment.bottomCenter,
                 colors: [
                   PortfolioColors.primary,
-                  PortfolioColors.secondary.withOpacity(.25),
+                  PortfolioColors.secondary.withValues(alpha: .25),
                 ],
               ),
             ),
@@ -2393,7 +2393,7 @@ class _ProjectCard extends StatelessWidget {
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
             colors: [
-              PortfolioColors.primary.withOpacity(.055),
+              PortfolioColors.primary.withValues(alpha: .055),
               palette.surface,
             ],
             stops: const [0, .52],
@@ -2529,7 +2529,7 @@ class _PackagesSection extends StatelessWidget {
                         height: 45,
                         alignment: Alignment.center,
                         decoration: BoxDecoration(
-                          color: PortfolioColors.secondary.withOpacity(.1),
+                          color: PortfolioColors.secondary.withValues(alpha: .1),
                           borderRadius: BorderRadius.circular(14),
                         ),
                         child: Text(
@@ -2560,7 +2560,7 @@ class _PackagesSection extends StatelessWidget {
                       ),
                       const SizedBox(height: 17),
                       Text(
-                        pkg.url.replaceFirst('https://', '') + ' ↗',
+                        "\${pkg.url.replaceFirst('https://', '')} ↗",
                         style: const TextStyle(
                           color: PortfolioColors.primary,
                           fontSize: 12.5,
@@ -2627,7 +2627,7 @@ class _PublicationsSection extends StatelessWidget {
                           : EdgeInsets.zero,
                       alignment: Alignment.center,
                       decoration: BoxDecoration(
-                        color: PortfolioColors.primary.withOpacity(.09),
+                        color: PortfolioColors.primary.withValues(alpha: .09),
                         borderRadius: BorderRadius.circular(17),
                       ),
                       child: Text(
@@ -2830,9 +2830,9 @@ class _ContactSection extends StatelessWidget {
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
             colors: [
-              PortfolioColors.primary.withOpacity(.13),
+              PortfolioColors.primary.withValues(alpha: .13),
               palette.surface,
-              PortfolioColors.secondary.withOpacity(.10),
+              PortfolioColors.secondary.withValues(alpha: .10),
             ],
             stops: const [0, .48, 1],
           ),
@@ -2893,7 +2893,7 @@ class _ContactItem extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.all(15),
         decoration: BoxDecoration(
-          color: Colors.white.withOpacity(.035),
+          color: Colors.white.withValues(alpha: .035),
           border: Border.all(color: palette.border),
           borderRadius: BorderRadius.circular(16),
         ),
@@ -2904,7 +2904,7 @@ class _ContactItem extends StatelessWidget {
               height: 42,
               alignment: Alignment.center,
               decoration: BoxDecoration(
-                color: PortfolioColors.primary.withOpacity(.09),
+                color: PortfolioColors.primary.withValues(alpha: .09),
                 borderRadius: BorderRadius.circular(13),
               ),
               child: Text(
@@ -3074,7 +3074,7 @@ class _BackToTopButtonState extends State<_BackToTopButton> {
               borderRadius: BorderRadius.circular(15),
               boxShadow: [
                 BoxShadow(
-                  color: PortfolioColors.primary.withOpacity(.23),
+                  color: PortfolioColors.primary.withValues(alpha: .23),
                   blurRadius: 35,
                   offset: const Offset(0, 14),
                 ),
@@ -3395,7 +3395,7 @@ class _ActionButtonState extends State<_ActionButton> {
             boxShadow: widget.primary
                 ? [
                     BoxShadow(
-                      color: PortfolioColors.primary.withOpacity(.22),
+                      color: PortfolioColors.primary.withValues(alpha: .22),
                       blurRadius: 35,
                       offset: const Offset(0, 13),
                     ),
@@ -3477,7 +3477,7 @@ class _Chip extends StatelessWidget {
         vertical: dense ? 6 : 7,
       ),
       decoration: BoxDecoration(
-        color: Colors.white.withOpacity(.025),
+        color: Colors.white.withValues(alpha: .025),
         border: Border.all(color: palette.border),
         borderRadius: BorderRadius.circular(999),
       ),
@@ -3515,11 +3515,11 @@ class _TagPill extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 7),
       decoration: BoxDecoration(
         color: (primary || secondary)
-            ? color.withOpacity(.065)
+            ? color.withValues(alpha: .065)
             : Colors.transparent,
         border: Border.all(
           color: (primary || secondary)
-              ? color.withOpacity(.25)
+              ? color.withValues(alpha: .25)
               : palette.border,
         ),
         borderRadius: BorderRadius.circular(999),
@@ -3547,9 +3547,9 @@ class _StatusPill extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 7),
       decoration: BoxDecoration(
-        color: PortfolioColors.secondary.withOpacity(.065),
+        color: PortfolioColors.secondary.withValues(alpha: .065),
         border: Border.all(
-          color: PortfolioColors.secondary.withOpacity(.28),
+          color: PortfolioColors.secondary.withValues(alpha: .28),
         ),
         borderRadius: BorderRadius.circular(999),
       ),
@@ -3618,9 +3618,9 @@ class _SmallLinkButtonState extends State<_SmallLinkButton> {
           padding: const EdgeInsets.symmetric(horizontal: 13, vertical: 10),
           transform: Matrix4.translationValues(0, _hovered ? -2 : 0, 0),
           decoration: BoxDecoration(
-            color: color.withOpacity(.065),
+            color: color.withValues(alpha: .065),
             border: Border.all(
-              color: color.withOpacity(_hovered ? .58 : .28),
+              color: color.withValues(alpha: _hovered ? .58 : .28),
             ),
             borderRadius: BorderRadius.circular(11),
           ),
@@ -3665,17 +3665,17 @@ class _ProjectLinkButtonState extends State<_ProjectLinkButton> {
     switch (widget.link.kind) {
       case 'store':
         foreground = PortfolioColors.primary;
-        background = PortfolioColors.primary.withOpacity(.055);
-        border = PortfolioColors.primary.withOpacity(.24);
+        background = PortfolioColors.primary.withValues(alpha: .055);
+        border = PortfolioColors.primary.withValues(alpha: .24);
         break;
       case 'appStore':
         foreground = PortfolioColors.secondary;
-        background = PortfolioColors.secondary.withOpacity(.055);
-        border = PortfolioColors.secondary.withOpacity(.24);
+        background = PortfolioColors.secondary.withValues(alpha: .055);
+        border = PortfolioColors.secondary.withValues(alpha: .24);
         break;
       default:
         foreground = widget.palette.text;
-        background = Colors.white.withOpacity(.025);
+        background = Colors.white.withValues(alpha: .025);
         border = widget.palette.border;
     }
 
@@ -3694,7 +3694,7 @@ class _ProjectLinkButtonState extends State<_ProjectLinkButton> {
             color: background,
             border: Border.all(
               color: _hovered
-                  ? PortfolioColors.primary.withOpacity(.5)
+                  ? PortfolioColors.primary.withValues(alpha: .5)
                   : border,
             ),
             borderRadius: BorderRadius.circular(11),
